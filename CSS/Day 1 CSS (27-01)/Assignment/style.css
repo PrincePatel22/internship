@@ -1,0 +1,121 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+}
+
+h1 {
+  color: #f55050;
+  text-align: center;
+}
+
+h2 {
+  color: #f55050;
+  text-align: center;
+}
+
+h3 {
+  color: #f48484;
+  text-align: center;
+}
+
+#avatar {
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+  border-style: solid;
+}
+
+table,
+td,
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th {
+  text-align: center;
+}
+
+th,
+td:nth-child(odd) {
+  background-color: #f48484;
+}
+
+th:nth-child(even),
+td:nth-child(even) {
+  background-color: #e8d2a6;
+}
+
+footer {
+  border-top: 2px solid black;
+}
+
+footer > div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 8px;
+  padding-top: 0;
+}
+
+footer > div > a,
+footer > div > p {
+  text-decoration: none;
+  color: #86a3b8;
+  margin: 0 4px;
+}
+#footer-container {
+  width: auto;
+}
+
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.card:hover {
+  background-color: #f55050;
+}
+
+.card-img {
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
+
+.card-title {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  margin: 5px 0;
+}
+
+#skill {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 70%;
+  gap: 30px;
+}
+
+#hobbies {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.hobbies:hover {
+  background-color: #f55050;
+}
+
+.hobbies {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 5px auto;
+  padding: 10px;
+}

@@ -1,0 +1,41 @@
+.user {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #b3e3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+  margin: 20px;
+}
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 7px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 2px solid #eb455f;
+  color: #eb455f;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #eb455f;
+}
+
+.paginationDisabled a {
+  color: white;
+  background-color: white;
+  border-color: white;
+}

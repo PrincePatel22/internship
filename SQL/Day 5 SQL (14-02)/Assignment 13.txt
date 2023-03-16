@@ -1,0 +1,171 @@
+=========================================================================================
+DATABASE :
+=========================================================================================
+
+Assume a hypothetical company that manages multiple automobile dealerships throughout INDIA.
+
+Following are the data requirements of our company :
+
+* A "car" is described by a vehicle identification number (VIN), make (e.g., Toyota), model (e.g., Prius), year, mileage, and two prices: the asking price (how much the dealership would like to sell the car for) and the invoice price (how much the dealership paid for the car). This information is maintained for every car currently in any dealership's inventory, and also for every car that has ever been sold by one of the dealerships. 
+
+* A dealership is a single location where the company sells cars. The company manages many dealerships, each one being described by a unique dealership ID, a name (e.g., Honda Sales, Yamaha World, Concept Hyundai etc.), street address, city, and state.
+
+* The company employs a number of salespeople. Each salesperson is assigned a unique salesperson ID. 
+
+* Salespeople work at one or more dealerships each month, and are paid a monthly base salary at each, regardless of how many cars they sell. Additionally, they are paid a commission on each car they sell. 
+
+* Information is maintained about all salespeople who ever worked for any dealership.
+
+* The following information is kept about each customer : ID, name, street address, city, and state.
+
+* Salespeople are arranged in a strict hierarchy, with each salesperson reporting to a "managing salesperson."
+
+* It is necessary to keep track of the inventory of cars currently available at each dealership. Of course, a particular car can only be in the inventory of one dealership at any given time.
+
+* A long-term record of all car sales is maintained. For each sale, the company tracks which car was bought, which customer bought it, which salesperson sold it, which dealership it was sold by, at which price it was sold for, and on which date it was sold.
+
+   i. car (recid, vin, make, model, year, mileage, askprice, invoiceprice)
+  ii. dealership (recid, name, address, city, state)
+ iii. salesperson (recid, name)
+  iv. customer (recid, name, address, city, state)
+   v. reportsto (recid, salespersonid, managingsalespersonid)
+  vi. worksat (recid, salespersonid, dealershipid, monthworked, basesalaryformonth)
+ vii. inventory (recid, vin, dealershipid)
+viii. sale (recid, vin, customerid, salespersonid, dealershipid, saleprice, saledate)
+
+
+CREATE TABLE `traineedb`.`car_Prince` (
+  `recid` INTEGER,`vin` VARCHAR(255),`make` VARCHAR(100),`model` VARCHAR(100),`year` INTEGER,`mileage` INTEGER,`askprice` FLOAT,`invoiceprice` FLOAT)
+INSERT INTO car_Prince 
+VALUES(1,'AAA','Porsche','Cayman',2011,9,30000,25000),(2,'BBB','Porsche','Carrera',2008,8,24000,21000),(3,'CCC','Audi','A8',2013,16,21000,18000),
+(4,'DDD','Audi','A4',2010,18,19000,17000),
+(5,'EEE','Ferrari','Italia',2009,7,80000,74000),(6,'FFF','McLaren','720s',2013,9,100000,90000)
+
+CREATE TABLE `traineedb`.`dealership_Prince` (`recid` INTEGER,`name` VARCHAR(255),`address` VARCHAR(255),`city` VARCHAR(100),`state` VARCHAR(100))
+INSERT INTO dealership_Prince VALUES(1,'Porsche Ahmedabad','S.G Highway','Ahmedabad','Gujarat'),
+(2,'Audi Ahmedabad','S.G Highway','Ahmedabad','Gujarat'),
+(3,'Big boy Toyz','Lal Darwaja','Ahmedabad','Gujarat');
+
+CREATE TABLE `traineedb`.`salesperson_Prince` (`recid` INTEGER,`name` VARCHAR(100))
+INSERT INTO salesperson_Prince VALUES(1,'salesperson1'),(2,'salesperson2'),
+(3,'salesperson3'),(4,'salesperson4'),(5,'salesperson5'),
+(6,'salesperson6'),(7,'salesperson7'),(8,'salesperson8'),(9,'salesperson9'); 
+
+CREATE TABLE `traineedb`.`customer2_Prince` (`recid` INTEGER,`name` VARCHAR(100),`address` VARCHAR(100),`city` VARCHAR(50),`state` VARCHAR(50))
+INSERT INTO customer2_Prince VALUES(1,'Name1','Address1','City1','State1'),
+(2,'Name2','Address2','City2','State2'),
+(3,'Name3','Address3','City3','State3'),
+(4,'Name4','Address4','City4','State4'),
+(5,'Name5','Address5','City5','State5'),
+(6,'Name6','Address6','City6','State6'),
+(7,'Name7','Address7','City7','State7'),
+(8,'Name8','Address8','City8','State8');
+
+CREATE TABLE `traineedb`.`reportsto_Prince` (`recid` INTEGER,`salespersonid` INTEGER,`managingsalespersonid` INTEGER)
+INSERT INTO reportsto_Prince VALUES
+(1,2,1),
+(2,3,1),
+(3,5,4),
+(4,6,4),
+(5,8,7),
+(6,9,7);
+
+CREATE TABLE `traineedb`.`worksat_Prince` (`recid` INTEGER,`salespersonid` INTEGER,`dealershipid` INTEGER,
+`monthworked` VARCHAR(50),`basesalaryformonth` FLOAT)
+INSERT INTO worksat_Prince VALUES(1,1,1,'March',7000),(2,2,1,'March',8000),(3,3,1,'March',6000),
+(4,4,2,'May',4000),(5,5,2,'May',5000),(6,6,2,'May',9000),
+(7,7,3,'April',5000),(8,8,3,'April',8000),(9,9,3,'April',7000);
+
+CREATE TABLE `traineedb`.`inventory_Prince` (`recid` INTEGER,`vin` VARCHAR(100),`dealershipid` INTEGER)
+INSERT INTO inventory_Prince VALUES(1,'AAA',1),
+(2,'BBB',1),
+(3,'CCC',2),
+(4,'DDD',2),
+(5,'EEE',3),
+(6,'FFF',3);
+
+CREATE TABLE `traineedb`.`sale_Prince` (`recid` INTEGER,`vin` VARCHAR(100),`customerid` INTEGER,`salespersonid` INTEGER,`dealershipid` INTEGER,`saleprice` FLOAT,`saledate` DATE)
+INSERT INTO sale_Prince VALUES
+(1,'AAA',2,2,1,29000,'2020-12-23'),
+(2,'CCC',3,5,2,22000,'2019-02-11'),
+(3,'FFF',1,9,3,110000,'2018-07-28'),
+(4,'AAA',8,3,1,29500,'2014-01-31'),
+(5,'EEE',6,9,3,83000,'2016-11-26'),
+(6,'DDD',5,6,2,20500,'2015-09-08'),
+(7,'EEE',2,8,3,81500,'2017-10-01'),
+(8,'CCC',4,6,2,19500,'2021-03-14'),
+(9,'BBB',7,3,1,26700,'2023-04-20');
+
+=========================================================================================
+QUERIES :
+=========================================================================================
+
+
+1. Find the names of all salespeople who have ever worked for the company at any dealership.
+   SELECT sa.name FROM salesperson_Prince sa INNER JOIN worksat_Prince wa on sa.recid=wa.recid WHERE wa.monthworked IS NOT NULL;
+
+
+2. List the Name, Street Address, and City of each customer who lives in Ahmedabad.
+  SELECT name AS Name,address AS Street Address,city AS City from customer2_Prince where city='City5';
+
+
+3. List the VIN, make, model, year, and mileage of all cars in the inventory of the dealership named "Hero Honda Car World".
+   SELECT ca.vin as VIN,ca.make AS Make,ca.model AS Model,ca.year as Year,ca.mileage as Mileage from car_Prince ca INNER JOIN inventory_Prince iv ON ca.recid=iv.recid WHERE iv.dealershipid=(SELECT recid fro dealership_Prince WHERE name='Porsche Ahmedabad');
+
+4. List names of all customers who have ever bought cars from the dealership named "Concept Hyundai".
+  SELECT cu.name from customer2_Prince cu inner join sale_Prince sa on cu.recid=sa.customerid where sa.dealershipid=(SELECT recid FROM dealership_Prince WHERE name='Audi Ahmedabad');
+
+5. For each car in the inventory of any dealership, list the VIN, make, model, and year of the car, along with the name, city, and state of the dealership whose inventory contains the car.
+SELECT ca.vin,ca.make,ca.model,ca.year,ds.name,ds.city,ds.state FROM car_Prince ca INNER JOIN inventory_Prince inv ON
+ca.vin=inv.vin INNER JOIN dealership_Prince ds ON ds.recid=inv.dealershipid;
+
+6. Find the names of all salespeople who are managed by a salesperson named "Adam Smith".
+SELECT sa.name FROM salesperson_Prince sa INNER JOIN reportsto_Prince rp on sa.recid=rp.salespersonid WHERE rp.managingsalespersonid=(SELECT recid from salesperson_Prince WHERE name="salesperson1");
+
+
+7. Find the names of all salespeople who do not have a manager.
+ SELECT sa.name FROM salesperson_Prince sa INNER JOIN reportsto_Prince rp on sa.recid=rp.recid WHERE rp.managingsalespersonid is null;
+
+8. Find the total number of dealerships.
+ SELECT COUNT(recid) FROM dealership_Prince;
+
+
+9. List the VIN, year, and mileage of all "Toyota Camrys" in the inventory of the dealership named "Toyota Performance". (Note that a "Toyota Camry" is indicated by the make being "Toyota" and the model being "Camry".)
+SELECT ca.vin,ca.year,ca.mileage from car_Prince ca INNER JOIN inventory_Prince inv ON ca.vin=inv.vin
+WHERE inv.dealershipid=(SELECT recid from dealership_Prince WHERE name='Porsche Ahmedabad');
+
+
+10. Find the name of all customers who bought a car at a dealership located in a state other than the state in which they live.
+SELECT cu.name FROM customer2_Prince cu INNER JOIN sale_Prince sa ON cu.recid=sa.customerid WHERE cu.state NOT IN (SELECT state FROM dealership_Prince);
+
+
+11. Find the name of the salesperson that made the largest base salary working at the dealership named "Ferrari Sales" during January 2007.
+SELECT sa.name FROM salesperson_Prince sa INNER JOIN worksat_Prince ws ON sa.recid=ws.salespersonid WHERE ws.basesalaryformonth=(SELECT MAX(basesalaryformonth) FROM worksat_Prince ws INNER JOIN dealership_Prince ds ON ws.dealershipid=ds.recid where ds.name='Porsche Ahmedabad' AND ws.monthworked='March');
+
+12. Find the salesperson ID and name of all salespeople who have worked at each one of the company's dealerships at some point in time.
+SELECT ws.salespersonid,sa.name FROM salesperson_Prince sa INNER JOIN worksat_Prince ws WHERE sa.recid NOT IN (SELECT salespersonid FROM worksat_Prince);
+
+
+13. List the name, street address, city, and state of any customer who has bought more than two cars from all dealerships combined since January 1, 2007.
+SELECT cu.name,cu.address,cu.city,cu.state FROM customer2_Prince cu INNER JOIN sale_Prince sa WHERE sa.saledate>'2007-01-01' AND cu.recid IN (SELECT customerid from sale_Prince GROUP BY customerid HAVING COUNT(customerid)>=2) GROUP BY sa.customerid;
+
+
+14. List the name, salesperson ID, and total sales amount for each salesperson who has ever sold at least one car. The total sales amount for a salesperson is the sum of the sale prices of all cars ever sold by that salesperson.
+SELECT a.name AS Name,a.recid AS ID,SUM(b.saleprice) AS Total Sales from salesperson_Prince a INNER JOIN sale_Prince b ON a.recid=b.salespersonid GROUP BY a.recid;
+
+15. Find the names of all customers who bought cars during 2007 who were also salespeople during 2007. For the purpose of this query, assume that no two people have the same name.
+SELECT cu.name FROM sale_Prince sa INNER JOIN salesperson_Prince sp ON sp.recid=sa.salespersonid INNER JOIN customer2_Prince cu ON cu.recid=sa.customerid WHERE year(sa.saledate)='2015' AND sp.name=cu.name;
+
+
+16. Find the name and salesperson ID of the salesperson who sold the most cars for the company at dealerships located in Gujarat between March 1, 2007 and March 31, 2007.
+SELECT sp.name,sp.recid from salesperson_Prince sp INNER JOIN sale_Prince sa ON sa.salespersonid=sp.recid INNER JOIN 
+dealership_Prince ds on ds.recid=sa.dealershipid WHERE ds.state='Gujarat' AND sa.saledate BETWEEN '2010-03-01' AND '2022-03-01' GROUP BY sp.name ORDER BY COUNT(sa.salespersonid) desc limit 1;
+
+
+17. Calculate the payroll for the month of March 2007.
+	* The payroll consists of the name, salesperson ID, and gross pay for each salesperson who worked that month.
+        * The gross pay is calculated as the base salary at each dealership employing the salesperson that month, along with the total commission for the salesperson that month.
+        * The total commission for a salesperson in a month is calculated as 5% of the profit made on all cars sold by the salesperson that month.
+        * The profit made on a car is the difference between the sale price and the invoice price of the car. (Assume, that cars are never sold for less than the invoice price.)
+
+SELECT sp.recid,sp.name,(ws.basesalaryformonth+(SUM(sa.saleprice-invoiceprice)*5/100)) AS 'Gross Pay' from salesperson_Prince sp INNER JOIN sale_Prince sa ON sp.recid=sa.salespersonid INNER JOIN car_Prince ca ON ca.vin=sa.vin INNER JOIN worksat_Prince ws ON ws.salespersonid=sp.recid WHERE ws.monthworked='April' AND year(sa.saledate)='2018' GROUP BY sp.name;

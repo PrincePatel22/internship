@@ -1,0 +1,97 @@
+/* universal selectors */
+* {
+  color: red;
+}
+
+/* id selectors */
+#id_selectors {
+  color: purple;
+  text-decoration: dotted;
+}
+
+/* class selectors */
+.class_selectors {
+  color: midnightblue;
+  text-shadow: 2px;
+}
+
+p.center {
+  color: navy;
+  text-align: center;
+}
+
+/* Group selectors */
+div,
+h1,
+p {
+  color: royalblue;
+}
+
+/* element selectors */
+p {
+  color: blue;
+}
+
+/* Descendant Selector */
+div p {
+  background-color: aliceblue;
+}
+
+/* Child Selector */
+div > p {
+  background-color: beige;
+}
+
+/* Adjacent Sibling Selector */
+div + p {
+  background-color: yellow;
+}
+
+/* general sibling selector */
+div ~ p {
+  background-color: darkgray;
+}
+
+/* psudo selectors */
+a:active {
+  color: aqua;
+}
+
+a:hover {
+  color: black;
+}
+
+a:visited {
+  color: aquamarine;
+}
+
+p:first-child {
+  color: blue;
+}
+
+q:lang(no) {
+  quotes: "*" "*";
+}
+
+p::selection {
+  color: red;
+  background: yellow;
+}
+
+/* attribute selectors */
+
+a[target="_blank"] {
+  background-color: palevioletred;
+}
+
+[title~="tree"] {
+  border: 5px solid salmon;
+}
+
+[class|="top"] {
+  background: yellow;
+}
+
+[class^="to"] {
+  background: red;
+}

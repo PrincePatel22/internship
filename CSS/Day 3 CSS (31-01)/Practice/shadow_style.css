@@ -1,0 +1,28 @@
+h2 {
+  color: black;
+  text-shadow: 4px 2px 5px lightslategray, 0 0 10px bisque;
+}
+
+.box {
+  margin-bottom: 30px;
+  height: 100px;
+  width: 400px;
+  background-color: indianred;
+  box-shadow: 10px 10px 5px lightblue;
+}
+
+.spread {
+  margin-bottom: 30px;
+  height: 100px;
+  width: 400px;
+  background-color: indianred;
+  box-shadow: 10px 10px 5px 12px lightblue;
+}
+
+.inset {
+  margin-bottom: 30px;
+  height: 100px;
+  width: 400px;
+  background-color: indianred;
+  box-shadow: 10px 10px 5px lightblue inset;
+}

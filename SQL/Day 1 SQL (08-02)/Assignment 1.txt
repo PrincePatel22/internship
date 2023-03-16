@@ -1,0 +1,56 @@
+1) Student Details table
+// Create table of Student Details
+create table Student_Details_Prince( Name varchar(255),Standard int,sex varchar(100),Monthly_Present int,Daily_Hours int);
+
+// add Details
+insert into Student_Details_Prince (Name,Standard,sex,Monthly_Present,Daily_Hours) values ('Parth','12','Male','20','9');
+insert into Student_Details_Prince (Name,Standard,sex,Monthly_Present,Daily_Hours) values ('Priyansh','10','Male','15','7');
+insert into Student_Details_Prince (Name,Standard,sex,Monthly_Present,Daily_Hours) values ('Dhruvi','9','Female','14','8');
+
+// Display table details 
+select * from Student_Details_Prince;
+
+//Delete table details
+Delete from Student_Details_Prince;
+truncate table Student_Details_Prince;
+
+//delete table from database
+drop table Student_Details_Prince;
+
+2) Products table
+// create table of Products
+create table Products_Prince(Name varchar(255),Price int);
+
+//add Details
+insert into Products_Prince (Name,Price) values("Toy",2500);
+insert into Products_Prince (Name,Price) values("Bike",100000);
+insert into Products_Prince (Name,Price) values("Car",400000);
+
+//Display 
+select * from Products_Prince;
+
+//Delete table details
+Delete from Products_Prince;
+truncate table Products_Prince;
+
+//delete table from database
+drop table Products_Prince;
+
+3) Materials table
+//Create table
+create table Materials_Prince (Name varchar(255),Price varchar(50),Effective_Date DATE);
+
+// add details
+insert into Materials_Prince (Name,Price,Effective_Date) values("Plastic","Rs. 100",'2022-11-23');
+insert into Materials_Prince (Name,Price,Effective_Date) values("Steel","Rs. 1000",'2020-10-02');
+insert into Materials_Prince (Name,Price,Effective_Date) values("Paint","Rs. 200",'2023-11-23');
+
+// Display table details
+select * from Materials_Prince; 
+
+// Delete table details
+Delete from Materials_Prince;
+truncate table Materials_Prince;
+
+// delete table from database
+drop table Materials_Prince;

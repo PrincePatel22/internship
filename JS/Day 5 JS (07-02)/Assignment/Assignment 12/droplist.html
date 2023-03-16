@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 12</title>
+    <style>
+        select {
+            margin-bottom: 10px;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+    </style>
+  </head>
+  <body>
+    <h3>Please select</h3>
+    <select name="countries" id="select" onchange="selectedCountry()">
+      <option value="none" id="one">Please Select</option>
+      <option value="UK">UK</option>
+      <option value="USA">USA</option>
+      <option value="India">India</option>
+      <option value="Spain">Spain</option>
+      <option value="Canada">Canada</option>
+    </select>
+    <div>You have selected : <pn id="output"></p></div>
+  </body>
+  <script src="droplist.js"></script>
+</html>

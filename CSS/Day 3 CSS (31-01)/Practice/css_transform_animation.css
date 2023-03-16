@@ -1,0 +1,164 @@
+div {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border: 1px solid black;
+}
+
+#tran1 {
+  transform: translate(100px, 30px);
+}
+
+#tran2 {
+  transform: scale(0.5, 0.5);
+}
+
+#tran3 {
+  transform: rotate(20deg);
+}
+
+#tran4 {
+  transform: scaleX(2);
+  transform: scaley(0.5);
+}
+
+#tran5 {
+  transform: skewX(20deg);
+  transform: skewY(20deg);
+}
+
+#tran6 {
+  transform: matrix(1, 0.3, 2, 1, 15, 15);
+}
+
+#tran7 {
+  transform: rotateX(150deg);
+  transform: rotateY(100deg);
+  transform: rotateZ(150deg);
+}
+
+#tran8 {
+  transform: scale3d(1, 0.75, 2);
+}
+
+#tran9 {
+  transform-style: flat;
+  perspective: none;
+  perspective-origin: inherit;
+  backface-visibility: hidden;
+}
+
+#tran10 {
+  background-color: coral;
+  transition-property: width;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 1s;
+}
+
+#tran10:hover {
+  width: 300px;
+  background-color: darkgrey;
+}
+
+@keyframes example {
+  0% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
+  25% {
+    background-color: yellow;
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    background-color: blue;
+    left: 200px;
+    top: 200px;
+  }
+  75% {
+    background-color: green;
+    left: 0px;
+    top: 200px;
+  }
+  100% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
+}
+
+#ani11 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+  animation-timing-function: ease-out;
+  animation-delay: 2s;
+  animation-iteration-count: 3;
+  animation-direction: alternate-reverse;
+  animation-play-state: running;
+  /* shorthand property for above animation: example 4s ease-out 2s 3 alternate-reverse */
+}
+
+#ani11:hover {
+  animation-play-state: paused;
+}
+
+#ani12 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  animation-name: example1;
+  animation-duration: 4s;
+  animation-delay: 2s;
+  animation-iteration-count: 2;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+#ani12:hover {
+  animation-play-state: paused;
+}
+
+@keyframes example1 {
+  0% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    background-color: yellow;
+    left: 300px;
+    top: 0px;
+  }
+}
+
+#ani13 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+  animation: example2 4s linear 2s infinite alternate;
+}
+
+#ani13:hover {
+  animation-play-state: paused;
+}
+
+@keyframes example2 {
+  0% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    background-color: yellow;
+    left: 300px;
+    top: 0px;
+  }
+}

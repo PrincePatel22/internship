@@ -1,0 +1,43 @@
+Tables used:
+===========
+1) product (recid, mfrid, description, price, qtyonhand)
+
+2) orders (recid, customerid, orderdate, salesrepsid, productid, qty, amount)
+
+3) customer (recid, company, salesrepsid, creditlimit)
+
+4) salesreps (recid, name, officeid, designation, hiredate, manager, quota, sales, age)
+
+5) office (recid, city, region, manager, targetsales, actualsales)
+
+
+Write queries for following requirements:
+
+
+Q-1	List all the orders which are over Rs.25,000/- including the name of the sales person 	who has taken the order and the name of the customer who has placed that order.
+SELECT ord.*,cu.company,sa.name from orders_Prince ord INNER JOIN customer_Prince cu on ord.customerid=cu.recid INNER JOIN salesreps_Prince sa on ord.customerid=sa.recid WHERE ord.amount>2200 GROUP BY ord.recid; 
+
+Q-2	List out total different customers served by each sales person.
+SELECT cu.company,sa.name from customer_Prince cu inner join salesreps_Prince sa on cu.salesrepsid=sa.recid;
+
+Q-3	Calculate total order for each customer of each sales person, sorted by customer and 	within each customer by sales person.
+SELECT ord.customerid AS 'Customer ID',COUNT(ord.recid) AS 'Total Order By Customer',sa.name AS 'Sales Person' FROM orders_Prince ord INNER JOIN salesreps_Prince sa ON ord.salesrepsid=sa.recid INNER JOIN customer_Prince cu ON ord.salesrepsid=cu.salesrepsid GROUP BY ord.customerid ORDER BY sa.name;
+
+
+Q-4	What is the average order size for each sales person whose order total is more than 	amount Rs.30,000/-.
+SELECT AVG(ord.qty),sa.name FROM orders_Prince ord INNER JOIN salesreps_Prince sa on ord.recid=sa.recid WHERE (ord.amount*ord.qty)>30000 GROUP BY sa.name;
+
+Q-5	List all the sales person who are over 40 in age and who manages a sales person whose 	sales are over quota.
+SELECT name from salesreps_Prince where age>40 and sales>quota;
+
+Q-6	List all the customers whose sales people are assign to two different offices in the 	"Eastern" sales region.
+
+
+Q-7	List all of the sales persons whose office target sales exceeds the sum of their quota.
+SELECT sa.* FROM salesreps_Prince sa INNER JOIN office_Prince of ON sa.recid= of.recid WHERE of.targetsales >(SELECT sum(quota) from salesreps_Prince) group by sa.name;
+
+Q-8	List all the sales people whose average order size for products manufactured by 56 	i.e.(mfrid) is 	higher than the overall average order size.
+SELECT sa.* FROM salesreps_Prince sa INNER JOIN orders_Prince ord ON ord.salesrepsid=sa.recid
+INNER JOIN product2_Prince pr ON pr.recid=ord.productid HAVING AVG(ord.qty) < (SELECT AVG(ord.qty)
+FROM orders_Prince INNER JOIN product2_Prince pr ON pr.recid=ord.productid WHERE pr.mfrid = 22);
+

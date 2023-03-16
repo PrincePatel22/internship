@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "name": "Jhon Deo",
+    "department": "Mobile",
+    "gender": "Male",
+    "projectid": "p2"
+  },
+  {
+    "id": "2",
+    "name": "Benny Hartmann",
+    "department": ".Net",
+    "gender": "Male",
+    "projectid": "p1"
+  },
+  {
+    "id": "3",
+    "name": "Lyla Turner",
+    "department": "Admin",
+    "gender": "Female",
+    "projectid": "p3"
+  },
+  {
+    "id": "4",
+    "name": "Sandy Kirlin",
+    "department": "Web",
+    "gender": "Male",
+    "projectid": "p4"
+  },
+  {
+    "id": "5",
+    "name": "Liana Connelly",
+    "department": "Web",
+    "gender": "Female",
+    "projectid": "p4"
+  }
+]

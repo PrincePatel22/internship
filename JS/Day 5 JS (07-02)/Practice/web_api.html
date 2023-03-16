@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Web API</title>
+  </head>
+  <body>
+    <p>Enter number between 50 to 500</p>
+    <input type="number" min="50" max="500" id="id1" required />
+    <button ondblclick="inputValidation()">Check</button>
+    <p id="msg"></p>
+    <p>Error display for greater than 50 and less than 10</p>
+    <input type="number" id="id2" max="50" min="10" />
+    <button ondblclick="myFunction()">Check</button>
+    <p id="msg2"></p>
+    <button onclick="goBack()">Go back</button>
+    <button onclick="goBackTwo()">Go back 2 pages</button>
+    <p id="msg3"></p>
+    <p id="msg4"></p>
+    <p id="msg5"></p>
+    <p id="msg6"></p>
+    <p id="fetch"></p>
+    <button onclick="getLocation()">Get location</button>
+    <p id="loc"></p>
+  </body>
+  <script src="web_api.js"></script>
+</html>

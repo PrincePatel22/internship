@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 4</title>
+    <style>
+      #radio {
+        margin: 10px 0;
+      }
+      #main {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        margin-right: 5px;
+        padding: 5px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <form name="form" onchange="result()">
+        <label for="tech">Please select your technology</label><br />
+        <div id="radio">
+          <input type="radio" id="php" name="tech" value="PHP" />
+          <label for="php">PHP</label>
+
+          <input type="radio" id="asp.net" name="tech" value="ASP.NET" />
+          <label for="asp.net">ASP.NET</label>
+
+          <input type="radio" id="asp" name="tech" value="ASP" />
+          <label for="asp">ASP</label>
+
+          <input type="radio" id="jsp" name="tech" value="JSP" />
+          <label for="jsp">JSP</label>
+
+          <input type="radio" id="perl" name="tech" value="PERL" />
+          <label for="perl">PERL</label>
+
+          <input
+            type="radio"
+            id="cold fusion"
+            name="tech"
+            value="Cold Fusion"
+          />
+          <label for="cold fusion">Cold Fusion</label>
+
+          <input type="radio" id="other" name="tech" value="Other" />
+          <label for="other">Other</label><br />
+        </div>
+        <label for="selected">You have selected : </label>
+        <span id="selected"></span>
+      </form>
+    </div>
+
+    <script src="singlespan.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+// create table
+create table student_Prince (recid int,name varchar(255));
+create table studentdetail_Prince (recid int,studentid int,standard int,sex varchar(50));
+create table studentpresent_Prince (recid int,studentid int,month varchar(50),present int);
+create table studenthours_Prince (recid int,studentid int,date date,hours int);
+create table product_Prince (recid int,name varchar(255));
+create table productprice_Prince (recid int,productid int,code varchar(255),effdt date,price int);
+
+// add data into product_Prince and productprice_Prince
+insert into product_Prince (recid,name) values(201,"Laptop");
+insert into product_Prince (recid,name) values(202,"Mobile");
+insert into product_Prince (recid,name) values(203,"Chrger");
+insert into product_Prince (recid,name) values(204,"Earphones");
+insert into product_Prince (recid,name) values(205,"Mouse");
+insert into product_Prince (recid,name) values(206,"MousePad");
+insert into product_Prince (recid,name) values(207,"PhoneCover");
+insert into product_Prince (recid,name) values(208,"Battery");
+insert into product_Prince (recid,name) values(209,"Keyboard");
+
+insert into productprice_Prince(recid,productid,code,effdt,price) values(201,701,"p1",'2020-12-22',50000);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(202,702,"p2",'2019-10-15',25000);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(203,703,"p3",'2010-09-08',1500);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(204,704,"p4",'2018-02-28',2000);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(205,705,"p5",'2011-03-30',200.75639);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(206,706,"p6",'2018-04-17',1245);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(207,707,"p7",'2017-02-15',150.50);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(208,708,"p8",'2019-02-28',1575);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(209,709,"p9",'2012-05-18',750.75);
+insert into productprice_Prince(recid,productid,code,effdt,price) values(205,705,"p5",'2010-03-30',200.75639);
+
+//Change value of 'student.name' with any other value for student.recid = 3
+update student_Prince set name="Jhon" where recid=3;
+
+// Update all "student" records to append character " A." as the middle name for "student.name" field.
+update student_Prince set name=concat(name," A.");
+
+//Update all "productprice" records to add 25.00 in "price" field.
+update productprice_Prince set price = price+25;
+
+//Update "product" table to add "A" in 'product.name' where related 'product.code = AB'.
+update product_Prince set name=concat(name," A") where recid = (select recid from productprice_Prince where code="p3");
+
+//Update all "studentpresent" records to add 2 in 'studentpresentpresent' where related 'studenthours.hours >= 8'.
+update studentpresent_Prince set present=present + 2 where recid in(select recid from studenthours_Prince where hours>=8); 
+
+//Remove a record from "product" table where 'product.recid = 5'
+delete from product_Prince where recid=204;
+
+//Remove all "student" records where the 'student.name' starts with character "A".
+delete from student_Prince where name like '%A';
+
+//Remove all "studentdetails" record where related 'studenthours.hours <= 3'.
+delete from studentdetail_Prince where recid in (select recid from studenthours_Prince where hours <=5);

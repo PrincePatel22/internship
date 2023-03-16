@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Website</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            margin: 0;
+        }
+        header>div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 10px;
+            border-bottom: 6px solid rgb(224, 224, 224);
+        }
+
+        nav>div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-left: 20px;
+            margin-right: 50px;
+        }
+
+        nav>div>a {
+            text-decoration: none;
+        }
+
+        footer {
+            border-top: 6px solid rgb(205, 205, 205);
+        }
+
+        footer>div {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 8px;
+            padding-top: 0;
+            padding-bottom: 25px;
+        }
+
+        footer>div>a,
+        p {
+            text-decoration: none;
+            color: gray;
+            margin: 0 4px;
+        }
+
+        main {
+            display: flex;
+            height: 50%;
+        }
+
+        .withoutborder>table {
+            border: none;
+            border-bottom: 2px dotted black;
+            margin: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .without-border,.without-border>td {
+            border: none;
+            padding: 4px;
+        }
+
+        .without-border>td:nth-child(odd) {
+            font-weight: 600;
+            text-align:end;
+            padding: 4x;
+        }
+
+        .blank {
+            width: 25%;
+            background-color: rgb(207, 207, 207);
+            border-top: 1px solid rgb(54, 54, 54);
+            border-bottom: 1px solid rgb(54, 54, 54);
+        }
+
+        .article {
+            width: 60%;
+        }
+
+        .events {
+            width: 15%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1 style="color: rgb(139, 139, 139) ;"><b>Client Name</b></h1>
+            <img src="logo.jpg" alt="logo">
+        </div>
+    </header>
+    <nav>
+        <div>
+            <a href="#"><img src="bullet1.gif" alt="bullet"> Home</a>
+            <a href="#"><img src="bullet1.gif" alt="bullet"> About Us</a>
+            <a href="#"><img src="bullet1.gif" alt="bullet"> Shower</a>
+            <a href="#"><img src="bullet1.gif" alt="bullet"> Product2</a>
+            <a href="#"><img src="bullet1.gif" alt="bullet"> Contact Us</a>
+        </div>
+        <img src="flashstrip.jpg" alt="image" width="100%">
+    </nav>
+    <main>
+        <div class="blank"></div>
+        <div class="article">
+            <h1 style="color:rgb(139, 139, 139) ;">Products2...</h1>
+            <div style="width: fit-content; margin-left: auto; margin-right: 10px;">
+                <input type="text" name="search" id="search">
+                <button type="submit" value="search" autofocus>Search</button>
+            </div>
+            <div class="withoutborder">
+                <table width="100%" style="border-top: 2px dotted black; margin-top: 20px;">
+                    <tr class="without-border">
+                        <td>Code</td>
+                        <td>ABC</td>
+                        <td>Info</td>
+                        <td>Info1</td>
+                    </tr>
+                    <tr class="without-border">
+                        <td>Name</td>
+                        <td>Product Name</td>
+                        <td>Dim1</td>
+                        <td>Dim1Val</td>
+                    </tr>
+                    <tr class="without-border">
+                        <td>Description</td>
+                        <td>Product Desc</td>
+                        <td>Dim2</td>
+                        <td>Dim2Val</td>
+                    </tr>
+                    <tr class="without-border">
+                        <td>Price</td>
+                        <td>20.00</td>
+                    </tr>
+                </table>
+                <table width="100%" style="margin-bottom: 40px;">
+                    <tr class="without-border">
+                        <td>Code</td>
+                        <td>ABC</td>
+                        <td>Info</td>
+                        <td>Info1</td>
+                    </tr>
+                    <tr class="without-border">
+                        <td>Name</td>
+                        <td>Product Name</td>
+                        <td>Dim1</td>
+                        <td>Dim1Val</td>
+                    </tr>
+                    <tr class="without-border">
+                        <td>Description</td>
+                        <td>Product Desc</td>
+                        <td>Dim2</td>
+                        <td>Dim2Val</td>
+                    </tr>
+                    <tr class="without-border">
+                        <td>Price</td>
+                        <td>20.00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>   
+        </div>
+        <div class="events">
+            <div>
+                <h3
+                    style="background-color: rgb(230, 230, 230); border-top: 1px solid black; border-bottom: 1px solid black; padding: 7px; margin-bottom: 5px;">
+                    News</h3>
+                <p style="color: black;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae
+                    praesentium, exercitationem omnis laudantium</p>
+            </div>
+            <div>
+                <h3
+                    style="background-color: rgb(230, 230, 230); border-top: 1px solid black; border-bottom: 1px solid black; padding: 7px; margin-bottom: 10px;">
+                    Events</h3>
+                <p style="color: black;">Events text will be here</p>
+                <p style="color: black;">Events text will be here</p>
+                <p style="color: black;">Events text will be here</p>
+                <p style="color: black;">Events text will be here</p>
+                <p style="color: black;">Events text will be here</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div style="padding-bottom:2px; padding-top: 5px;">
+            <a href="#">Home</a>|
+            <a href="#">About Us</a>|
+            <a href="#">Product1</a>|
+            <a href="#">Product2</a>|
+            <a href="#">Contact Us</a>
+        </div>
+        <div>
+            <p>@2004, All rights reserved</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

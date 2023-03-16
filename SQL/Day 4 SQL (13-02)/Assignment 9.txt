@@ -1,0 +1,58 @@
+Table Used: 
+	
+	-   newstudent (recid, surname, firstname, middlename, gender, admitdate, endeffdt)
+    
+NOTE :	[I] Please specify the CREATE query for above table as well.
+	[II] In all below queries, fetch and display "Name" field in this format :  
+	"Surname Firstname Middlename".
+	[III] "endeffdt" represents date on which a particular student record was deleted. Hence fetch only active student records from above table.
+
+     // Create Table
+    CREATE TABLE newstudent_Prince(recid INT,surname VARCHAR(255),firstname VARCHAR(255),middlename VARCHAR(255),gender VARCHAR(50),admitdate DATE,endeffdt DATE);
+
+    // Add data into table
+    INSERT INTO newstudent_Prince VALUES(101,"Patel","Ekta","R.","Female","2015-05-20","2017-04-25");
+    INSERT INTO newstudent_Prince VALUES(102,"Shah","Mr. Parth","Jaybhai","Male","2006-04-23","2009-06-08");
+    INSERT INTO newstudent_Prince VALUES(103,"Thakur","Yasha","Devendrabhai","Female","2008-03-20","2012-07-25");
+    INSERT INTO newstudent_Prince VALUES(104,"Shah","Mr. Sapan","Rajeshbhai","Male","2014-05-20","2016-04-25");
+    INSERT INTO newstudent_Prince VALUES(105,"Patel","Maya","Prashantbhai","Female","2013-05-25","2017-04-15");
+    INSERT INTO newstudent_Prince VALUES(106,"Dodiya","Pratikbhai","Piyushbhai","Male","2012-04-22","2015-05-18");
+    INSERT INTO newstudent_Prince VALUES(107,"Nandha","Tushar","Rajeshbhai","Male","2013-04-21","2015-05-07");
+    INSERT INTO newstudent_Prince VALUES(108,"Korat","Amee","Shubhambhai","Female","2011-04-22","2012-05-18");
+    INSERT INTO newstudent_Prince VALUES(109,"Patel","Mr. Sanket","Rajbhai","Male","2007-03-22","2009-05-09");
+    INSERT INTO newstudent_Prince VALUES(110,"Savliya","Dhrumil","Sureshbhai","Male","2010-06-22","2013-05-02");
+    INSERT INTO newstudent_Prince VALUES(111,"Patel","Hira","Jaybhai","Female","2019-06-22","2011-05-02");
+
+
+Q-1	List out the information of students whose surname is "Shah".
+=>  SELECT recid,CONCAT(surname,' ',firstname,' ',middlename) AS Name,gender,admitdate,endeffdt FROM newstudent_Prince WHERE surname="Shah";
+
+Q-2	List out the information of all the Male students.
+=>  SELECT recid,CONCAT(surname,' ',firstname,' ',middlename) AS Name,gender,admitdate,endeffdt FROM newstudent_Prince WHERE gender="Male";
+
+Q-3	List out the information of all the Female students, whose surname is "Patel" or have 	been admitted after than 1-Jan-2006.
+=>  SELECT recid,CONCAT(surname,' ',firstname,' ',middlename) AS Name,gender,admitdate,endeffdt FROM newstudent_Prince WHERE gender="Female" AND (surname="Patel" OR admitdate>"1-Jan-2006");
+
+Q-4	List out the information of all the students whose second name ends with "Bhai".
+=>  SELECT recid,CONCAT(surname,' ',firstname,' ',middlename) AS Name,gender,admitdate,endeffdt FROM newstudent_Prince WHERE middlename LIKE "%bhai";
+
+Q-5	List out the information of all the students whose first name starts with "M" and 	second name has "ant".
+=>  SELECT recid,CONCAT(surname,' ',firstname,' ',middlename) AS Name,gender,admitdate,endeffdt FROM newstudent_Prince WHERE firstname LIKE "M%" AND middlename LIKE "%ant%";
+
+Q-6	List out the information of all the students whose surname has "c" in the third place.
+=>  SELECT recid,CONCAT(surname,' ',firstname,' ',middlename) AS Name,gender,admitdate,endeffdt FROM newstudent_Prince WHERE surname LIKE "__t%";
+
+Q-7	List the name's of the all the students in "Ekta R. Patel" format.
+=>  SELECT recid,CONCAT(firstname,' ',LEFT(middlename,1),'.',' ',surname) AS Name FROM newstudent_Prince;
+
+Q-8	List out First Name as well as its respective length for all the students.
+=> SELECT firstname,LENGTH(firstname) AS length from newstudent_Prince;
+
+Q-9	Append the First Name with "bhai" for all the male students whose First Name does not 	contain "bhai".
+=> SELECT CONCAT(firstname,'bhai') FROM newstudent_Prince WHERE gender="Male" AND firstname NOT LIKE "%bhai";
+
+Q-10 List out First Name of all the male students with "Mr." before the First Name.
+=>  SELECT firstname FROM newstudent_Prince WHERE gender="Male" AND firstname LIKE "Mr.%";
+
+Q-11 List out First Name of all the students which sounds like "Mira".
+=>  SELECT firstname FROM newstudent_Prince WHERE RIGHT(SOUNDEX(firstname),3) LIKE RIGHT(SOUNDEX("Mira"),3);

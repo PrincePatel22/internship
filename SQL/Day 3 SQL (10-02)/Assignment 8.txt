@@ -1,0 +1,89 @@
+Q-1	I want to add 3 days to the current date. Write all possible queries to perform this operation. Explain each one of them.
+SELECT CURDATE() + 3; => we get current date  using CURDATE() and add 
+SELECT CURRENT_DATE() + 3; => We get current date using CURRENT_DATE() and add 3
+SELECT DATE_ADD(CURDATE(),INTERVAL 3 DAY); => We get current date using CURDATE() and Add 3 days interval
+SELECT ADDDATE(CURDATE(),INTERVAL 3 DAY); =>  We get current date using CURDATE() and Add 3 days interval 
+
+Q-2	I want to add 3 years to the current date. Write all possible queries to perform this operation. Explain each one of them.
+SELECT DATE_ADD(CURDATE(),INTERVAL 3 YEAR); => We get current date using CURDATE() and Add 3 years interval
+SELECT ADDDATE(CURDATE(),INTERVAL 3 YEAR); =>  We get current date using CURDATE() and Add 3 years interval 
+
+Q-3	I want to add 3 months to the current date. Write all possible queries to perform this operation. Explain each one of them.
+SELECT DATE_ADD(CURDATE(),INTERVAL 3 MONTH); => We get current date using CURDATE() and Add 3 months interval
+SELECT ADDDATE(CURDATE(),INTERVAL 3 MONTH); =>  We get current date using CURDATE() and Add 3 months interval 
+
+Q-4	I want to deduct 2 days from the current date.  Write all possible queries to perform this operation. Explain each one of them.
+SELECT DATE_SUB(CURDATE(),INTERVAL 2 DAY); => We get current date using CURDATE() and deduct 2 days interval
+SELECT SUBDATE(CURDATE(),INTERVAL 2 DAY); =>  We get current date using CURDATE() and deduct 2 days interval 
+
+Q-5	Write a query to add 5 days and 15 hours to date and time "2007-01-26 12:30:45".
+SELECT ADDDATE(ADDTIME("2007-01-26 12:30:45","15:00:00"),INTERVAL 5 DAY);
+
+Q-6	Write all possible queries which will return current date.
+SELECT CURDATE();
+SELECT CURRENT_DATE();
+SELECT DATE(NOW());
+SELECT DATE(CURDATE());
+
+Q-7	Write all possible queries which will return current time.
+SELECT CURTIME();
+SELECT CURRENT_TIME();
+SELECT TIME(NOW());
+SELECT TIME(CURTIME());
+
+Q-8	Input Date is "2007-01-26 12:30:45". Write queries to output following date formats:
+
+	- "January 26, 2007"
+	- "The 26th of January"
+	- 2007
+	- 07
+	- 26/1/7
+	- 26/01/07
+	- 26/01/2007
+	- 01/26/07
+	- 26/01/07 12:30:45
+	- 26/01/07 12:30:45 PM
+=> SELECT DATE_FORMAT("2007-01-26 12:30:45",'"%M %d, %Y"');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'"The %D of %M"');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%Y');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%y');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%e/%c/%y');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%d/%m/%y');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%d/%m/%Y');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%m/%d/%y');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%d/%m/%y %T');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%d/%m/%y %r');
+
+Q-9	Input Date is "2007-01-26 12:30:45". Write queries to output following date formats:
+
+	- Friday
+	- 26 (Explanation: 26th day of the month)
+	- 6 (Explanation: 6th day of the week)
+	- 26 (Explanation: 26th day of the year)
+=> SELECT DATE_FORMAT("2007-01-26 12:30:45",'%W');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%d');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%w');
+   SELECT DATE_FORMAT("2007-01-26 12:30:45",'%j');
+ 
+Q-10	Explain UNIX_TIMESTAMP and FROM_UNIXTIME functions with examples.
+UNIX_TIMESTAMP return the number of seconds that have passed since ‘1970-01-01.
+SELECT UNIX_TIMESTAMP('2020-10-17 02:35:43');  
+Output => 1602882343
+
+FROM_UNIXTIME will return date /DateTime representation of a Unix timestamp.
+SELECT FROM_UNIXTIME(799462445, '%d-%m-%Y %T');
+Output => 03-05-1995 06:24:05
+
+Q-11	Write the output of the following query and explain it.
+
+	SELECT PERIOD_ADD(200601, 3);
+Output => 200604    It add 3 month to 200601 // supported format YYMM or YYYYMM
+
+
+Q-12	Write the output of the following query and explain it.
+
+	SELECT PERIOD_DIFF(200601, 200609);
+Output => -8    It return difference between two periods in context of month // supported format YYMM or YYYYMM
+
+Q-13	Explain the use of "LAST_INSERT_ID()" function in real life applications.
+"LAST_INSERT_ID()" function return ID that has been inserted or updated in a table.When we use this function it retuen id that is last inserted in our table or that is last updated in our table.

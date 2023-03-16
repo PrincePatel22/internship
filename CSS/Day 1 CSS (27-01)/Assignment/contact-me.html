@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact me</title>
+  </head>
+  <body>
+    <form action="/action_page.php" method="post ">
+      <label for="fname">Full name : </label>
+      <input
+        type="text"
+        id="fname"
+        name="fname"
+        placeholder="Jhon smith"
+      /><br /><br />
+      <label for="email">*Email : </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        autofocus
+      /><br /><br />
+      <label for="number">*Phone Number : </label>
+      <input type="tel" id="number" name="number" required /><br /><br />
+      <label for="message">Your Message : </label>
+      <textarea name="message" id="message" cols="30" rows="10"></textarea
+      ><br /><br />
+      <button
+        type="button"
+        onclick="alert('Your responce is successfully submitted')"
+      >
+        Submit
+      </button>
+      <button type="reset">Reset</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+.text {
+  border: 2px solid gray;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.text-color {
+  color: rgb(75, 82, 82);
+}
+
+.text-color > a {
+  text-decoration: none;
+  color: #008cba;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.a {
+  text-align-last: center;
+}
+
+.b {
+  text-align-last: justify;
+}
+
+.c {
+  text-align-last: right;
+}
+
+.d {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+img.a {
+  vertical-align: text-top;
+}
+
+img.b {
+  vertical-align: text-bottom;
+}
+
+img.c {
+  vertical-align: sub;
+}
+
+img.d {
+  vertical-align: super;
+}
+
+img.e {
+  vertical-align: baseline;
+}
+
+.deco1 {
+  text-decoration-line: overline;
+  text-decoration-color: black;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 3px;
+}
+
+.deco2 {
+  text-decoration-line: underline;
+  text-decoration-color: rgb(75, 82, 82);
+  text-decoration-style: double;
+  text-decoration-thickness: 4px;
+}
+
+.deco3 {
+  text-decoration: underline dotted 5px;
+}
+
+.spacing {
+  text-indent: 10px;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  line-height: 20px;
+  white-space: pre-line;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.shadow {
+  text-shadow: 2px 3px 2px #ff6666;
+}
+

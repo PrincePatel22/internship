@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 9</title>
+  </head>
+  <body>
+    <div style="background-color: #588157">
+      <form name="form">
+        <div style="padding: 10px 5px">
+          <label for="fnum"><strong>Please enter first number:</strong></label>
+          <input type="text" name="fnum" id="fnum" />
+          <label for="snum"><strong>Please enter second number:</strong></label>
+          <input type="text" name="snum" id="snum" />
+        </div>
+        <div>
+          <input type="radio" name="operation" id="add" value="add" />
+          <label for="add">Addition</label>
+        </div>
+        <div>
+          <input type="radio" name="operation" id="sub" value="sub" />
+          <label for="sub">Subtraction</label>
+        </div>
+        <div>
+          <input type="radio" name="operation" id="mul" value="mul" />
+          <label for="mul">Multiplition</label>
+        </div>
+        <div>
+          <input type="radio" name="operation" id="div" value="div" />
+          <label for="div">Division</label>
+        </div>
+        <div style="padding: 10px 5px">
+          <button type="submit">Calculate</button>
+          <button type="reset">Reset</button>
+        </div>
+        <div>
+          <div
+            id="output"
+            style="padding-bottom: 10px; padding-left: 5px"
+          ></div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="math.js"></script>
+</html>

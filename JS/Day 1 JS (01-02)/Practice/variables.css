@@ -1,0 +1,7 @@
+.button {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(174, 146, 146);
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 5px;
+}

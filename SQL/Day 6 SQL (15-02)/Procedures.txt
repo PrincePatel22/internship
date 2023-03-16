@@ -1,0 +1,96 @@
+// Create procedures
+DELIMITER //
+CREATE PROCEDURE servedCustomer ()
+BEGIN
+SELECT cu.company,sa.name from customer_Prince cu inner join salesreps_Prince sa on cu.salesrepsid=sa.recid;
+END //
+DELIMITER 
+
+DELIMITER //
+CREATE PROCEDURE stu_pro (sid INT)
+BEGIN
+SELECT *,sid from student_Prince;
+END //
+DELIMITER ; 
+
+DELIMITER //
+CREATE PROCEDURE stu_pro2 (sid INT,teacher VARCHAR(255))
+BEGIN
+SELECT *,sid,teacher from student_Prince;
+END //
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE stu_pro3 (IN stuid INT)
+BEGIN
+SELECT *,stuid from student_Prince;
+END //
+DELIMITER;
+
+
+DELIMITER //
+CREATE PROCEDURE stu_pro4 (IN name VARCHAR(255),OUT total INT)
+BEGIN
+SELECT name INTO total from student_Prince;
+END //
+DELIMITER;
+
+DELIMITER // 
+CREATE PROCEDURE staffDetails(In staffName VARCHAR(255))
+BEGIN
+SELECT name AS Name,designation as Designation,salary AS Salary FROM officestaff_Prince where name=staffName;
+END //
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE setCounter(INOUT counter INT,IN incre INT)
+BEGIN
+ SET counter=counter + incre;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE engineerDetails(IN post VARCHAR(255))
+BEGIN
+ SELECT name AS Name,salary AS Salary FROM officestaff_Prince WHERE designation=post;
+END//
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE totalManager(IN post VARCHAR(100),OUT total INT)
+BEGIN
+SELECT COUNT(designation) INTO total FROM officestaff_Prince WHERE designation=post;
+END//
+DELIMITER; 
+
+DELIMITER //
+CREATE PROCEDURE salaryDetails(IN inputSalary INT)
+BEGIN
+ SELECT * FROM officestaff_Prince WHERE salary<inputSalary;
+END//
+DELIMITER;
+
+// Executing Stored Procedure
+CALL servedCustomer ();
+CALL stu_pro(121);
+CALL stu_pro2(121,'Jhon Deo');
+CALL stu_pro3(102);
+CALL staffDetails('Elon Musk');
+CALL engineerDetails('Software Engineer');
+CALL salaryDetails(5000);
+
+CALL stu_pro4('Abhi',@total);
+select @total;
+
+SET @counter =20;
+CALL setCounter(@counter,5);
+CALL setCounter(@counter,2);
+SELECT @counter;
+
+CALL totalManager('HR Manager',@total);
+SELECT @total;
+
+// Drop Procedures
+DROP PROCEDURE servedCustomer;
+DROP PROCEDURE stu_pro;
+DROP PROCEDURE stu_pro2;

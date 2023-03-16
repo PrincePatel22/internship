@@ -1,0 +1,54 @@
+Q-1 Write a query which will output 123,456.78(as string datatype) for the input value of 123456.77912.
+SELECT INSERT (CAST(ROUND(123456.77912,2) AS VARCHAR),4,0,",");
+SELECT FORMAT(123456.77912,2);
+
+Q-2 What will be the output of following query : (Explain the result)
+	SELECT INSERT("newyork", 4, 4, "jercy");
+output => newjercy
+reason => its starting position is 4 and it replace 4 character so we get newjercy.
+
+Q-3 Write a query to find position of letter 'd' in the string 'abcdefgh'.
+SELECT LOCATE('d','abcdefgh');
+
+Q-4 Write a query which will output "hello world" for input string "Hello World".
+SELECT LCASE("Hello World");
+
+Q-5 Write a query to find 3 characters from the left of any given string.
+SELECT LEFT('Football',3);
+
+Q-6 Write a query to find 3 characters from the right of any given string.
+SELECT RIGHT('Football',3);
+
+Q-7 Write a query which will return length of any given string.
+SELECT LENGTH('Football');
+
+Q-8 Write a query which will output "------abcd" for input string "abcd".
+SELECT LPAD("abcd",10,"-");
+
+Q-9 Write a query which will output "abcd......" for input string "abcd".
+SELECT RPAD("abcd",10,".");
+
+Q-10 Write a query which will output "abcd  " for input string "  abcd  ".
+SELECT LTRIM("  abcd  ");
+
+Q-11 Write a query which will output "  abcd" for input string "  abcd  ".
+SELECT RTRIM("  abcd  ");
+
+Q-12 Write a query which will output "is" for input string "The weather is very nice.".
+SELECT SUBSTRING("The weather is very nice.",-13,2);
+SELECT SUBSTRING("The weather is very nice.",13,2);
+
+Q-13 Write a query which will output "hellohellohello" for input string "hello".
+SELECT REPEAT("hello",3);
+
+Q-14 Write a query which will output ".ecin yrev si rehtaew ehT" for input string "The weather is very nice.".
+SELECT REVERSE("The weather is very nice.");
+
+Q-15 Explain the use of function SOUNDEX().
+SOUNDEX converts into code that is based on how the string sounds when spoken in English.
+
+Q-16 Write a query which will output "is very nice." for input string "The weather is very nice.".
+SELECT SUBSTRING("The weather is very nice.",13);
+
+Q-17 Explain the use of TRIM function.
+TRIM is used for remove spaces from leading and trailing string.it is also used for remove character from string.

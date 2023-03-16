@@ -1,0 +1,125 @@
+// college management system
+Student(sid,name,DoB,city,mobile,parentid)
+faculties(fid,name,depid)
+department(depid,name)
+subject(subid,name)
+lecture(recid,subid,fid,depid)
+parent(parid,name,city)
+
+
+CREATE TABLE `traineedb`.`pr_student` (
+  `sid` INTEGER NOT NULL DEFAULT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50),
+  `DoB` VARCHAR(45),
+  `city` VARCHAR(45),
+  `mobile` INTEGER,
+  `parentid` INTEGER,
+  PRIMARY KEY (`sid`)
+)
+
+CREATE TABLE `traineedb`.`pr_faculties` (
+  `fid` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45),
+  `depid` INTEGER,
+  PRIMARY KEY (`fid`)
+)
+
+CREATE TABLE `traineedb`.`pr_department` (
+  `depid` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45),
+  PRIMARY KEY (`subid`)
+)
+
+CREATE TABLE `traineedb`.`pr_subject` (
+  `subid` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45),
+  PRIMARY KEY (`subid`)
+)
+
+CREATE TABLE `traineedb`.`pr_lecture` (
+  `recid` INTEGER NOT NULL AUTO_INCREMENT,
+  `subid` INTEGER,
+  `fid` INTEGER,
+  `depid` INTEGER,
+  PRIMARY KEY (`recid`)
+)
+
+CREATE TABLE `traineedb`.`pr_parent` (
+  `parid` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45),
+  `city` VARCHAR(45),
+  PRIMARY KEY (`parid`)
+)
+
+INSERT INTO pr_student(name,DoB,city,mobile,parentid)
+VALUES("Riya Ganguly","2005-11-20","Kota",008762124,1),
+("Kalpana More","2006-12-05","Mumbai",074300719,2),
+("Nawab Gagrani","2004-05-12","Gandhinagar",000239404,3),
+("Jiya Ganguly","2009-02-17","Kota",078034434,1),
+("Sneha Hayre","2007-05-22","Gangtok",062792961,4),
+("Sirish Gour","2010-08-06","Darjeeling",040899745,5);
+
+INSERT INTO pr_faculties(name,depid)
+VALUES("Baldev Beharry",1),
+("Ankita Karpe",1),
+("Faraz Anne",2),
+("Manoj Anthony",2),
+("Mehul Chana",3),
+("Tulsi Mitra",4),
+("Sukriti Agarwal",5);
+
+INSERT INTO pr_department(name)
+VALUES("Information Technology"),
+("Computer Engineering"),
+("Electrical Engineering"),
+("Civil Engineering"),
+("EC Engineering");
+
+INSERT INTO pr_subject(name)
+VALUES("Wireless Communication"),
+("DSA"),
+("Concrit Technology"),
+("BME"),
+("BEE"),
+("BE"),
+("PPS");
+
+INSERT INTO pr_lecture(subid,fid,depid)
+VALUES(1,2,1),
+(2,3,2),
+(3,6,4),
+(4,5,3),
+(5,5,3),
+(6,7,5),
+(7,1,1),
+(8,1,1);
+
+INSERT INTO pr_parent(name,city)
+VALUES("Uday Ganguly","Kota"),
+("Nandini More","Mumbai"),
+("Tulsi Gagrani","Gandhinagar"),
+("Nitika Hayre","Gangtok"),
+("Kalpana Gour","Darjeeling");
+
+
+SELECT stu.name,stu.city,stu.DoB,fa.name,dp.name,sub.name,pr.name FROM pr_student stu JOIN pr_faculties fa ON lec.fid=fa.fid JOIN pr_department dp ON fa.depid=dp.depid JOIN pr_subject sub ON sub.subid=lec.subid JOIN pr_parent pr ON stu.parentid=pa.parid JOIN pr_lecture lec ON lec.subid=sub.subid;
+
+
+
+ i. car (recid, vin, make, model, year, mileage, askprice, invoiceprice)
+  ii. dealership (recid, name, address, city, state)
+ iii. salesperson (recid, name)
+  iv. customer (recid, name, address, city, state)
+   v. reportsto (recid, salespersonid, managingsalespersonid)
+  vi. worksat (recid, salespersonid, dealershipid, monthworked, basesalaryformonth)
+ vii. inventory (recid, vin, dealershipid)
+viii. sale (recid, vin, customerid, salespersonid, dealershipid, saleprice, saledate)
+
+SELECT ca.vin AS VIN,ca.make AS Make,ca.model AS Model,ca.year AS Year,ca.mileage AS Mileage,ds.name AS 'Delarship Name',ds.city AS city,sp.name AS 'Salesperson Name',cu.name AS 'customer name',rp.managingsalespersonid AS 'Managing person ID',ws.basesalaryformonth AS 'Salary of Salesperson',sa.saleprice AS 'Sale Price',sa.saledate AS 'Sale date' FROM car_Prince ca
+JOIN sale_Prince sa ON ca.vin=sa.vin
+JOIN worksat_Prince ws ON ws.dealershipid=sa.dealershipid
+JOIN reportsto_Prince rp ON ws.dealershipid=rp.salespersonid
+JOIN dealership_Prince ds ON ws.dealershipid=ds.recid
+JOIN salesperson_Prince sp ON sa.salespersonid=sa.recid
+JOIN customer2_Prince cu ON cu.recid=sa.customerid GROUP BY ws.basesalaryformonth;
+

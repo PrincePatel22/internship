@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Information</title>
+    <style>
+        body {
+            padding: 8px;
+        }
+
+        header>div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgb(235, 190, 197);
+        }
+
+        .withoutborder>table {
+            border: none;
+            border-bottom: 1px solid black;
+            margin: 0;
+            
+        }
+
+        .without-border,.without-border>td {
+            border: none;
+            padding: 4px;
+        }
+
+        .without-border>td:nth-child(odd) {
+            font-weight: 600;
+            text-align:end;
+            padding: 4px;
+        }
+
+        footer>div {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(243, 239, 239);
+            padding: 18px 8px;
+            margin-top: 30px;
+
+        }
+
+        footer>div>a {
+            text-decoration: none;
+            color: gray;
+            margin: 0 4px;
+        }
+
+        header>div>p,
+        h2 {
+            padding: 5px 2px;
+            margin: 28px 10px;
+        }
+
+        table,
+        tr,
+        td {
+            border-radius: 1px;
+            border-style: groove;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h2>Products</h2>
+            <p><b>Number of Products</b> : 15</p>
+        </div>
+    </header>
+    <div>
+        <table width="100%">
+            <caption style="text-align: start;margin: 12px 0 20px 0;"><strong>Product Codes</strong></caption>
+            <tr>
+                <td>Code1</td>
+            </tr>
+            <tr>
+                <td>Code2</td>
+            </tr>
+            <tr>
+                <td>Code3</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table width="100%">
+            <caption style="text-align: start;margin: 35px 0 15px 0;"><strong>Product Codes and Names</strong></caption>
+            <tr>
+                <td>Code1</td>
+                <td>Name1</td>
+            </tr>
+            <tr>
+                <td>Code2</td>
+                <td>Name2</td>
+            </tr>
+            <tr>
+                <td>Code3</td>
+                <td>Name3</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table width="100%">
+            <caption style="text-align: start;margin: 35px 0 15px 0;"><strong>Products</strong></caption>
+            <tr>
+                <td align="center">Code1</td>
+                <td>Name1</td>
+                <td>Description1</td>
+                <td align="right">Price</td>
+                <td align="center">Disable</td>
+            </tr>
+            <tr>
+                <td align="center">Code2</td>
+                <td>Name2</td>
+                <td>Description1</td>
+                <td align="right">Price2</td>
+                <td align="center">Enable</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <p style="margin: 20px 0 10px 0;"><b>Product Drop Down</b></p><br>
+        <label for="products" style="color: gray ;">Select Products:</label>
+        <select name="products" id="products">
+            <option value="prod1">Prod1</option>
+            <option value="prod2">Prod2</option>
+            <option value="prod3">Prod3</option>
+        </select>
+    </div>
+    <div>
+        <table width="100%">
+            <caption style="text-align: start;margin: 35px 0 15px 0;"><strong>Products</strong></caption>
+            <tr>
+                <td align="center">Code1</td>
+                <td>Name1</td>
+                <td>Description1</td>
+                <td align="right">Price</td>
+                <td align="center">Disable</td>
+                <td align="center">Info1</td>
+                <td align="center">Info2</td>
+            </tr>
+            <tr>
+                <td align="center">Code2</td>
+                <td>Name2</td>
+                <td>Description1</td>
+                <td align="right">Price2</td>
+                <td align="center">Enable</td>
+                <td align="center">Info1</td>
+                <td align="center">Info2</td>
+            </tr>
+            <tr>
+                <td><br></td>
+                <td><br></td>
+                <td><br></td>
+                <td><br></td>
+                <td><br></td>
+                <td><br></td>
+                <td><br></td>
+            </tr>
+        </table>
+    </div>
+    <div class="withoutborder">
+        <table width="100%">
+            <caption style="text-align: start;margin: 35px 0 15px 0;"><strong>Products</strong></caption>
+            <tr class="without-border">
+                <td>Code</td>
+                <td>Code1</td>
+                <td>Info</td>
+                <td>Info1</td>
+            </tr>
+            <tr class="without-border">
+                <td>Name</td>
+                <td>Name1</td>
+                <td>Dim1</td>
+                <td>Dim1Val</td>
+            </tr>
+            <tr class="without-border">
+                <td>Description</td>
+                <td>Desc1</td>
+                <td>Dim2</td>
+                <td>Dim2Val</td>
+            </tr>
+            <tr class="without-border">
+                <td>Price</td>
+                <td>Price1</td>
+            </tr>
+        </table>
+        <table width="100%">
+            <tr class="without-border">
+                <td>Code</td>
+                <td>Code1</td>
+                <td>Info</td>
+                <td>Info1</td>
+            </tr>
+            <tr class="without-border">
+                <td>Name</td>
+                <td>Name1</td>
+                <td>Dim1</td>
+                <td>Dim1Val</td>
+            </tr>
+            <tr class="without-border">
+                <td>Description</td>
+                <td>Desc1</td>
+                <td>Dim2</td>
+                <td>Dim2Val</td>
+            </tr>
+            <tr class="without-border">
+                <td>Price</td>
+                <td>Price1</td>
+            </tr>
+        </table>
+    </div>
+    <footer>
+        <div>
+            <a href="#">Home</a>|
+            <a href="#">About us</a>|
+            <a href="#">Contact Us</a>|
+            <a href="#">Services</a>|
+            <a href="#">Products</a>
+        </div>
+    </footer>
+</body>
+
+</html>

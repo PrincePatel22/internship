@@ -1,0 +1,184 @@
+/* linear Gradient */
+#grad1 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: linear-gradient(#1c315e, #227c70, #88a47c, #e6e2c3);
+}
+
+#grad2 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: linear-gradient(
+    to right,
+    #1c315e,
+    #227c70,
+    #88a47c,
+    #e6e2c3
+  );
+}
+
+#grad3 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: linear-gradient(
+    to bottom right,
+    #1c315e,
+    #227c70,
+    #88a47c,
+    #e6e2c3
+  );
+}
+
+#grad4 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: linear-gradient(180deg, #1c315e, #227c70, #88a47c, #e6e2c3);
+}
+
+#grad5 {
+  height: 150px;
+  background-color: rgb(34, 124, 112);
+  background-image: linear-gradient(
+    to right,
+    rgb(34, 124, 112),
+    rgb(34, 124, 0)
+  );
+}
+
+#grad6 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: repeating-linear-gradient(
+    #1c315e,
+    #227c70 10%,
+    #88a47c 20%,
+    #e6e2c3 10%
+  );
+}
+
+/* radial Gradient */
+
+#grad7 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: radial-gradient(#1c315e, #227c70, #88a47c, #e6e2c3);
+}
+
+#grad8 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: radial-gradient(
+    ellipse,
+    #1c315e,
+    #227c70,
+    #88a47c,
+    #e6e2c3
+  );
+}
+
+#grad9 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: radial-gradient(
+    closest-side at 60% 55%,
+    #1c315e,
+    #227c70,
+    #88a47c,
+    #e6e2c3
+  );
+}
+
+#grad10 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: radial-gradient(
+    farthest-corner at 60% 55%,
+    #1c315e,
+    #227c70,
+    #88a47c,
+    #e6e2c3
+  );
+}
+
+#grad11 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: repeating-radial-gradient(
+    #1c315e 10%,
+    #227c70 20%,
+    #88a47c 30%,
+    #e6e2c3
+  );
+}
+
+/* conic gradient */
+#grad12 {
+  height: 150px;
+  background-color: #1c315e;
+  background-image: conic-gradient(#1c315e, #227c70, #88a47c, #e6e2c3);
+}
+
+#grad13 {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #1c315e;
+  background-image: conic-gradient(#1c315e, #227c70, #88a47c, #e6e2c3);
+}
+
+#grad14 {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #1c315e;
+  background-image: conic-gradient(
+    #1c315e 0deg,
+    #1c315e 90deg,
+    #227c70 90deg,
+    #227c70 180deg,
+    #88a47c 180deg,
+    #88a47c 270deg,
+    #e6e2c3 270deg,
+    #e6e2c3 360deg
+  );
+}
+
+#grad15 {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #1c315e;
+  background-image: conic-gradient(
+    at 60% 45%,
+    #1c315e,
+    #227c70,
+    #88a47c,
+    #e6e2c3
+  );
+}
+
+#grad16 {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #1c315e;
+  background-image: repeating-conic-gradient(
+    #1c315e 10%,
+    #227c70 20%,
+    #88a47c 20%,
+    #e6e2c3 10%
+  );
+}
+
+#grad17 {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background-color: #1c315e;
+  background-image: repeating-conic-gradient(
+    #1c315e 0deg 10deg,
+    #227c70 10deg 20deg,
+    #88a47c 20deg 30deg,
+    #e6e2c3 30deg 40deg
+  );
+}

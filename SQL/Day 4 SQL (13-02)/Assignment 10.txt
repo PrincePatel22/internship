@@ -1,0 +1,91 @@
+Tables Used:
+===========
+	Table - I :	officestaff
+	Fields	:	recid (Primary Key), name, designation, salary, overtimesalary, bossno, addressid (Reference Key)
+
+    CREATE TABLE officestaff_Prince(recid INT PRIMARY KEY,name VARCHAR(255),designation VARCHAR(255),salary FLOAT,overtimesalary FLOAT,bossno INT,addressid INT,FOREIGN KEY (addressid) REFERENCES address_Prince(recid));
+     
+	Table - II :	address
+	Fields :	recid (Primary Key), address1, address2, city, county, postalcode, country
+
+    CREATE TABLE address_Prince(recid INT PRIMARY KEY,address1 VARCHAR(255),address2 VARCHAR(255),city VARCHAR(100),county VARCHAR(100),postalcode VARCHAR(100),country VARCHAR(100));
+
+    INSERT INTO officestaff_Prince VALUES(101,"Jhon Smith","HR Manager",5000,500,501,101);
+    INSERT INTO officestaff_Prince VALUES(102,"Evan Dcruz","Software Engineer",7000,1000.10,502,102);
+    INSERT INTO officestaff_Prince VALUES(103,"Pettersen Kari","Account Manager",6000.65,700,503,103);
+    INSERT INTO officestaff_Prince VALUES(104,"Svendson Tove","Software Engineer",6500,500,502,104);
+    INSERT INTO officestaff_Prince VALUES(105,"Elon Musk","Software Engineer Intern",2000,400,504,105);
+    INSERT INTO officestaff_Prince VALUES(106,"Eron Finch","Account Manager",5000,500.50,503,106);
+    INSERT INTO officestaff_Prince VALUES(107,"Jhon Deo","HR Manager",5000,600,501,107);
+
+    INSERT INTO address_Prince VALUES(101,"Obere Str. 57","	Avda. de la Constitución","Berlin","Ontario","12209","Germany");
+    INSERT INTO address_Prince VALUES(102,"Mataderos 2312","120 Hanover Sq.","London","Tsawassen","WA1 1DP","UK");
+    INSERT INTO address_Prince VALUES(103,"12, rue des Bouchers","Tsawassen Blvd.","Buenos Aires","	Bern","1010","Argentina");
+    INSERT INTO address_Prince VALUES(104,"35 King George","Kirchgasse","Graz","Lille","8010","Austria");
+    INSERT INTO address_Prince VALUES(105,"Via Monte Bianco 34","rue Royale","Nantes","Bräcke","05442-030","France");
+    INSERT INTO address_Prince VALUES(106,"8 Johnstown Road","Garden House Crowther Way","Cowes","Cork","PO31 7PJ","Ireland");
+    INSERT INTO address_Prince VALUES(107,"12 Orchestra Terrace","Magazinweg","Frankfurt","Barquisimeto","V3F 2K1","Germany");
+
+Write queries for following requirements:
+
+Q-1	List Name, Designation and Salary of all "officestaff" members.
+=> SELECT name AS Name,designation as Designation,salary AS Salary FROM officestaff_Prince;
+
+Q-2	List Name and Salary of all the people who are working as "Programmer".
+=> SELECT name AS Name,salary AS Salary FROM officestaff_Prince WHERE designation="Software Engineer";
+
+Q-3	List all the information about those people who are earning less than Rs.10,000/- .
+=> SELECT * from officestaff_Prince WHERE salary<10000;
+
+Q-4	List all the information about those staff members who fall in the salary range of 	Rs.5000/- to Rs.10,000/- .
+=>  SELECT * from officestaff_Prince WHERE salary BETWEEN 5000 AND 10000;
+
+Q-5	List Name of all the office staff members in Lower Case.
+=> SELECT LOWER(name) FROM officestaff_Prince;
+
+Q-6	List Name of all the office staff members in following format:
+	For example, if name is "umeshbhai" then display it in the format "Umeshbhai".
+=> SELECT CONCAT(LOWER(SUBSTR(name,1,1)),SUBSTR(name,2)) FROM officestaff_Prince;
+
+Q-7	List all the information about those people who works for "Nileshbhai".
+=> SELECT * FROM officestaff_Prince WHERE bossno IN (SELECT recid FROM officestaff_Prince WHERE name="Nileshbhai");
+
+Q-8	List all the information about those members with salary greater than or equal to Rs.3000/- or working directly under "Nileshbhai".
+=> SELECT * FROM officestaff_Prince WHERE salary>=3000 OR bossno IN (SELECT recid FROM officestaff_Prince WHERE name="Nileshbhai");
+
+Q-9	List Name, Salary, Over-time Salary of all the office staff members.
+=> SELECT name AS Name,salary AS Salary,overtimesalary AS "Over-time Salary" FROM officestaff_Prince;
+
+Q-10 Perform above MySQL statement again, but now 0(Zero) should be substituted for NULL in Over-time Salary field.
+=>   SELECT CASE WHEN overtimesalary=0 THEN NULL ELSE overtimesalary END AS "Over-time Salary",name AS Name,salary AS Salary FROM officestaff_Prince;
+
+Q-11 List Name and Total Monthly Salary (Salary + Over-time Salary) of all the office staff 	members.
+=>  SELECT name AS Name,(salary+overtimesalary) AS Salary FROM officestaff_Prince;
+
+Q-12 List Name and Total Annual Salary of all the office staff members.
+=>  SELECT name AS Name,salary*12 AS Salary FROM officestaff_Prince;
+
+Q-13 List Name and Total Daily Salary of all the office staff members. (Consider a month is 	of 30 days).
+=>  SELECT name AS Name,salary/30 AS "Daily Salary" FROM officestaff_Prince;
+
+Q-14 List all the information of the person earning Highest Salary (Salary + Over-time 	Salary) in the staff.
+=>  SELECT *,(salary+overtimesalary) FROM officestaff_Prince ORDER BY (salary+overtimesalary) DESC LIMIT 1;
+    SELECT * FROM officestaff_Prince WHERE salary+overtimesalary >= (SELECT MAX(salary+overtimesalary) FROM officestaff_Prince);
+
+Q-15 List all the information of the person earning Least Salary (Salary + Over-time Salary) 	in the staff.
+=>  SELECT * FROM officestaff_Prince WHERE salary+overtimesalary <= (SELECT MIN(salary+overtimesalary) FROM officestaff_Prince);
+
+Q-16 List all the information about those who earn the Highest Salary (Salary + Over-time 	Salary) and those who earn the Least Salary (Salary + Over-time Salary) in the staff.
+=>  SELECT * FROM officestaff_Prince WHERE salary+overtimesalary >= (SELECT MAX(salary+overtimesalary) FROM officestaff_Prince) OR salary+overtimesalary <= (SELECT MIN(salary+overtimesalary) FROM officestaff_Prince);
+
+Q-17 List all the information about the person who earns more than his boss.
+=>  SELECT * FROM officestaff_Prince WHERE salary > (SELECT salary from office_Prince WHERE recid=bossno);
+
+Q-18	List Name, Designation, Salary and City of each staff member.
+=> SELECT name AS Name,designation AS Designation,city AS City FROM officestaff_Prince INNER JOIN address_Prince ON officestaff_Prince.recid=address_Prince.recid;
+
+Q-19	Using "address" table list total number of persons residing in "Ahmedabad" city.
+=>  SELECT COUNT(city) FROM address_Prince WHERE city="London";
+
+Q-20	List those City Name where 3 or more than 3 people resides.
+=>  SELECT city FROM address_Prince GROUP BY city HAVING COUNT(CITY)>=3;

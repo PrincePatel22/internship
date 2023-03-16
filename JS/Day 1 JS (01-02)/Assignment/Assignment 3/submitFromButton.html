@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 3</title>
+
+    <style>
+      input {
+        margin-top: 5px;
+        margin-right: 5px;
+        height: 20px;
+      }
+      #button {
+        background-color: cornflowerblue;
+        width: 60px;
+        height: 23px;
+      }
+      .input-error {
+        border: 1px solid black;
+      }
+      .message-class {
+        margin-top: 10px;
+        font-weight: 1000;
+        color: crimson;
+      }
+      #validate-container {
+        margin: auto;
+        width: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="validate-container">
+      <form>
+        <h2>Validate your number</h2>
+        <input
+          id="input"
+          class="input"
+          type="text"
+          name="input"
+          placeholder="Enter any value"
+          autofocus
+        />
+        <input
+          id="button"
+          type="button"
+          value="submit"
+          onclick="fetchInput()"
+        />
+        <div class="message-class" id="message"></div>
+      </form>
+    </div>
+  </body>
+  <script src="submitFromButton.js"></script>
+</html>

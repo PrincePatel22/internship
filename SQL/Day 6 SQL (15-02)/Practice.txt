@@ -1,0 +1,51 @@
+// CREATE VIEW
+CREATE VIEW salesName AS SELECT sa.name FROM salesperson_Prince sa INNER JOIN worksat_Prince wa on sa.recid=wa.recid WHERE wa.monthworked IS NOT NULL;
+
+// DISPLAY VIEW
+SELECT * FROM salesName;
+
+// UPDATE VIEW
+CREATE OR REPLACE VIEW salesName AS SELECT sa.name,sa.recid FROM salesperson_Prince sa INNER JOIN worksat_Prince wa on sa.recid=wa.recid WHERE wa.monthworked IS NOT NULL;
+
+//DROP VIEW
+DROP VIEW salesName;
+
+//Regular Expression and not Regular Expression
+SELECT name FROM salesperson_Prince WHERE name REGEXP '^sa';
+SELECT name FROM salesperson_Prince WHERE name REGEXP '2';
+SELECT name FROM salesperson_Prince WHERE name REGEXP 'le?';
+SELECT name FROM salesperson_Prince WHERE name REGEXP 'sa|le';
+SELECT name FROM salesperson_Prince WHERE name REGEXP '[jk]';
+SELECT name FROM salesperson_Prince WHERE name REGEXP '[f-t].[a]';
+SELECT name FROM salesperson_Prince WHERE name NOT REGEXP '[^jz]';
+SELECT name FROM salesperson_Prince WHERE name NOT REGEXP 'person[[:>:]]';
+SELECT name FROM salesperson_Prince WHERE name NOT REGEXP 'person[[:<:]]';
+SELECT name FROM salesperson_Prince WHERE name NOT REGEXP '[:alpha:]';
+
+// RLIKE and NOT LIKE
+SELECT * FROM salesperson_Prince WHERE name RLIKE '^S';
+SELECT * FROM salesperson_Prince WHERE recid RLIKE '^1';
+SELECT * FROM salesperson_Prince WHERE name NOT RLIKE '^s';
+SELECT * FROM salesperson_Prince WHERE recid NOT RLIKE '^5';
+
+SELECT REGXXP_LIKE('sale','Persona') AS Result FROM salesperson_Prince;
+SELECT REGEXP_REPLACE(name,'^Sale','^Male') FROM salesperson_Prince;
+SELECT REGEXP_SUBSTR('sale','s.l',1,1);
+SELECT REGEXP_INSTR('salesperson','sale');
+
+// Create index 
+CREATE INDEX id_name ON student_Prince(recid,name);
+CREATE UNIQUE INDEX id_name2 ON student_Prince(recid,name);
+
+
+// Display index
+SHOW INDEX FROM student_Prince;
+
+// drop index
+DROP INDEX student_Prince;
+
+// LEAD Function 
+SELECT recid,customerid,orderdate,qty,LEAD(amount,1) OVER(PARTITION BY customerid ORDER BY recid) AS 'Next Amount' FROM orders_Prince;
+
+// LAG Function
+SELECT recid,customerid,orderdate,qty,LAG(amount,1,0) OVER(PARTITION BY customerid ORDER BY recid) AS 'Previous Amount' FROM orders_Prince;

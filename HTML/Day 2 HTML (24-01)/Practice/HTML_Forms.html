@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Enter your Information</h1>
+    <form action="/action_page.php" target="_blank" method="get" autocomplete="on" accept-charset="utf-8" name="myform"
+        novalidate>
+        <!-- enctype="multipart/form-data" The enctype attribute can be used only if method="post". -->
+        <fieldset>
+            <legend>Personal</legend>
+            <label for="fname">First name </label>
+            <input type="text" id="fname" name="fname"><br>
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" name="lname">
+        </fieldset>
+        <h2>Select your city</h2>
+        <input type="radio" id="Ahmedabad" name="city" value="Ahmedabad">
+        <label for="city">Ahmedabad</label>
+        <input type="radio" id="Surat" name="city" value="Surat">
+        <label for="city">Surat</label>
+        <input type="radio" id="Vadodara" name="city" value="Vadodara">
+        <label for="city">Vadodara</label>
+        <h2>Select Your Favourite langagues</h2>
+        <input type="checkbox" id="HTML" name="langague1" value="HTML">
+        <label for="langague1">HTML</label>
+        <input type="checkbox" id="CSS" name="langague2" value="CSS">
+        <label for="langague2">CSS</label>
+        <input type="checkbox" id="JS" name="langague3" value="JS">
+        <label for="langague3">JS</label><br>
+        <label for="cars">Your Favourite car</label>
+        <select name="cars" id="cars" size="2" multiple>
+            <option value="audi">Audi</option>
+            <option value="volvo" selected>Volvo</option>
+            <option value="fiat">Fiat</option>
+            <option value="rangerover">Range rover</option>
+        </select><br>
+        <input list="browsers">
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist><br>
+        <label for="message">Enter your feedback</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea><br>
+        <button type="button" onclick="alert('thank you for your feedback')">Submit feedback</button><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

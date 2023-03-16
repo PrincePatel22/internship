@@ -1,0 +1,87 @@
+Tables Used :=  
+    -	student  (recid, name)
+    -   studentdetail (recid, studentid, standard, flagsex)
+    -   studentpresent (recid, studentid, month, present)
+    -   studenthours (recid, studentid, datex, hours)
+    -   product (recid, name)
+    -   productprice (recid, productid, code, effdt, price)
+
+Q-1 Write a query which will print name of each student, and his or her attendance report for current month. 
+Fields : Name, Attendance Report for Current Month
+	Under "Attendance Report for Current Month" column:
+		if 'studentpresent.present' is less than or equal to 7 print "Poor", 
+		if 'studentpresent.present' is more than 7 and less than or equals 15 print "Good", 
+		if 'studentpresent.present' is more than 15 and less than or equals 20 print "Better", 
+		if 'studentpresent.present' is more than 20 print "Best".
+
+SELECT name, CASE WHEN present<=7 THEN 'POOR' WHEN (present>7 AND present<=15) THEN 'Good' WHEN (present>15 AND present<=20) THEN 'Better' ELSE 'BEST' END AS 'Attendance Report for Current Month' FROM studentpresent_Prince NATURAL JOIN student_Prince  WHERE MONTH="Feb" GROUP BY NAME;
+
+Q-2 Write a query to print student name, total number of hours for Jan, Feb, March month. Information for each student should be printed in a single row.
+Fields : Name, Working Hours for Jan, Working Hours for Feb, Working Hours for March
+	See following example:
+	Name		Working Hours for Jan	Working Hours for Feb	Working Hours for March
+	Minesh		80			70			90
+	Reena		70			80			90
+
+SELECT name, CASE WHEN MONTH(date)=1 THEN sum(hours) END AS "Working Hours for Jan" ,CASE WHEN MONTH(date)=2 THEN sum(hours) END AS "Working Hours for Feb",CASE WHEN MONTH(date)=3 THEN sum(hours) END AS "Working Hours for March" FROM student_Prince NATURAL JOIN studenthours_Prince WHERE hours IS NOT NULL GROUP BY name;
+
+Q-3 Print information for the student having name like "Mira", "Kabir", "Om", "Manas"
+	Fields: Name, Standard
+
+    SELECT student_Prince.name AS Name,studentdetail_Prince.standard AS Standard FROM student_Prince INNER JOIN studentdetail_Prince ON student_Prince.recid=studentdetail_Prince.recid WHERE name IN ("Abhi","Sahil","Yasha","Maulik A.");
+
+Q-4 Print information for the student having name other than "Mira", "Kabir", "Om", "Manas"
+	Fields: Name, Standard
+
+    SELECT student_Prince.name AS Name,studentdetail_Prince.standard AS Standard FROM student_Prince INNER JOIN studentdetail_Prince ON student_Prince.recid=studentdetail_Prince.recid WHERE name NOT IN ("Abhi","Sahil","Yasha","Maulik A.");
+
+Q-5 Print information for the student having presence for Jananuary between 20 to 25.
+	Fields: Name, Standard, Present
+   SELECT name,standard,present FROM student_Prince INNER JOIN studenthours_Prince
+   ON student_Prince.recid=studenthours_Prince.recid INNER JOIN studentdetail_Prince ON studenthours_Prince.recid=studentdetail_Prince.recid
+   INNER JOIN studentpresent_Prince ON studentdetail_Prince.recid=studentpresent_Prince.recid
+   WHERE MONTH(date)=2 AND EXTRACT(DAY FROM date) BETWEEN 20 AND 25
+   GROUP BY name;
+	
+Q-6 Print information for the student having charcter "r" at the third position of their name.
+	Fields: Name, Standard
+	Eg: It should print information for "Mira", "Gira" etc.
+
+    SELECT student_Prince.name,studentdetail_Prince.standard FROM student_Prince INNER JOIN studentdetail_Prince ON student_Prince.recid=studentdetail_Prince.recid WHERE name LIKE "__r%";
+
+Q-7 Print information for the student having "bhai" in their name. 
+	Fields: Name, Standard
+
+    SELECT student_Prince.name,studentdetail_Prince.standard FROM student_Prince INNER JOIN studentdetail_Prince ON student_Prince.recid=studentdetail_Prince.recid WHERE name LIKE "%bhai%";
+
+Q-8 Print information for the student who do not have any presence in the college.
+	Fields: Name, Standard
+
+   SELECT name,standard FROM student_Prince INNER JOIN studentdetail_Prince ON student_Prince.recid=studentdetail_Prince.recid INNER JOIN studentpresent_Prince ON student_Prince.recid=studentpresent_Prince.recid WHERE present IS NULL;
+
+
+Q-9 Write a query which will print name of each student, and his or her attendance report for current month. 
+	Fields : Name, Attendance Report for Current Month
+	In "Attendance Report for Current Month" column 
+	if student has presence for that month then print "Present"
+	else print "Not Present".
+
+     SELECT name, CASE WHEN present>=14 THEN "Present" ELSE "Not Present" END AS "Attendance Report for Current Month" from student_Prince NATURAL JOIN studentpresent_Prince  WHERE month="Feb" GROUP BY name;
+
+Q-10 Execute following queries and evaluate the output by giving appropriate reason.
+	SELECT STRCMP('text', 'text2');
+	SELECT STRCMP('text2', 'text');
+	SELECT STRCMP('text', 'text');
+
+SELECT STRCMP('text', 'text2'); output= -1 because string1 < string2 for ascii value
+SELECT STRCMP('text2', 'text'); output= 1 because string1 > string2 for ascii value
+SELECT STRCMP('text', 'text');  output= 0 because string1 = string2 for ascii value
+
+
+Q-11 Print the student information having average presence (in percentage) for Jan, Feb and March between 60 to 75.
+	Fields: Name, Standard, Present
+    SELECT name,SUM(present) From student_Prince NATURAL JOIN studentdetail_Prince NATURAL JOIN studentpresent_Prince GROUP BY name HAVING SUM(present)*100/60 BETWEEN 60 AND 75;
+
+Q-12 List information of the product having "Maximum Price" within date range 01-01-2006 to 15-01-2006
+
+SELECT product_Prince.recid,productid,code,effdt,MAX(price) FROM productprice_Prince INNER JOIN product_Prince ON product_Prince.recid=productprice_Prince.recid WHERE effdt BETWEEN '2015-01-01' AND '2020-01-01';

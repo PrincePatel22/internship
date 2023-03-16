@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms tag</title>
+</head>
+
+<body>
+    <form name="personal" id="personal" method="get">
+        <fieldset name="personal" form="personal">
+            <legend>Personal Information</legend>
+            <label for="fname">First Name : </label>
+            <input type="text" name="fname" id="fname"><br><br>
+            <label for="lname">Last Name : </label>
+            <input type="text" name="lname" id="lname"><br><br>
+            <label for="pnumber">Phone Number : </label>
+            <input type="tel" name="pnumber" id="pnumber">
+        </fieldset><br>
+        <label for="city">Your City:</label>
+        <select name="city" id="city">
+            <optgroup label="Gujarat">
+                <option value="Surat">Surat</option>
+                <option value="Ahmedabad">Ahmedabd</option>
+            </optgroup>
+            <optgroup label="Madhya Pradesh">
+                <option value="indore">Indore</option>
+                <option value="bhopal">Bhopal</option>
+            </optgroup>
+        </select><br><br>
+        Username: <input type="text" name="uname">
+        <br><br>
+        Encryption: <keygen name="secure" type="RSA">
+        <input type="submit">
+    </form>
+
+</body>
+
+</html>

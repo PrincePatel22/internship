@@ -1,0 +1,29 @@
+CREATE TABLE details(Fname VARCHAR(100),Lname VARCHAR(100),DoB VARCHAR(100),Address VARCHAR(255));
+INSERT INTO details VALUES('Aman','Shah','06-01-1982','Bhopal');
+INSERT INTO details VALUES('Ravi','Yadav','28-09-1984','ManiNagar');
+
+
+// First method
+CREATE TABLE details_new LIKE details;
+INSERT INTO details_new SELECT * FROM details GROUP BY Fname;
+SELECT * FROM details_new;
+
+// Second method
+DELETE FROM details WHERE Fname IN(
+    SELECT Fname FROM (SELECT Fname, ROW_NUMBER() OVER (PARTITION BY Fname ORDER BY Fname) AS row_num
+     FROM details) AS New_Table WHERE row_num>1);
+
+// Third method
+DELIMITER//
+CREATE PROCEDURE details_Prince()
+BEGIN
+CREATE TABLE details_new SELECT DISTINCT * FROM details;
+DROP TABLE details;
+ALTER TABLE details_new RENAME TO details;
+END //
+DELIMITER;
+
+SELECT * FROM details;
+
+// Delete a from details AS a inner join details as b 
+where a.Fname=b.Fname AND a.Lname=b.Lname and a.DoB=b.DoB and a.Address=b.Address; //

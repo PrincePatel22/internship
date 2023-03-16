@@ -1,0 +1,49 @@
+p {
+  width: 200px;
+  border: 1px solid black;
+}
+
+p.test1 {
+  writing-mode: horizontal-tb;
+}
+
+span.test2 {
+  writing-mode: vertical-rl;
+}
+
+p.test2 {
+  writing-mode: vertical-rl;
+}
+
+#test1 {
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
+
+#test2 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#test3 {
+  word-wrap: break-word;
+}
+
+#test4 {
+  word-break: break-all;
+}
+
+#justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+#test1:hover {
+  overflow: visible;
+}
+
+#test2:hover {
+  overflow: visible;
+}

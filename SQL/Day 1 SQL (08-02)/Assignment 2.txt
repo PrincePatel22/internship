@@ -1,0 +1,70 @@
+// Create table
+create table student_Prince (recid int,name varchar(255));
+create table studentdetail_Prince (recid int,studentid int,standard int,sex varchar(50));
+create table studentpresent_Prince (recid int,studentid int,month varchar(50),present int);
+create table studenthours_Prince (recid int,studentid int,date date,hours int);
+
+// add data into table
+insert into student_Prince (recid,name) values (001,"Parth");
+insert into student_Prince (recid,name) values (002,"Maulik");
+insert into student_Prince (recid,name) values (003,"Shubham");
+insert into student_Prince (recid,name) values (004,"Abhi");
+insert into student_Prince (recid,name) values (005,"Yasha");
+insert into student_Prince (recid,name) values (006,"Sahil");
+
+insert into studentdetail_Prince (recid,studentid,standard,sex) values(001,100,10,"Male");
+insert into studentdetail_Prince (recid,studentid,standard,sex) values(002,200,11,"Male");
+insert into studentdetail_Prince (recid,studentid,standard,sex) values(003,300,12,"Male");
+insert into studentdetail_Prince (recid,studentid,standard,sex) values(004,400,9,"Male");
+insert into studentdetail_Prince (recid,studentid,standard,sex) values(005,500,9,"Female");
+insert into studentdetail_Prince (recid,studentid,standard,sex) values(006,600,8,"Male");
+
+insert into studentpresent_Prince (recid,studentid,month,present) values(001,100,"Jan",20);
+insert into studentpresent_Prince (recid,studentid,month,present) values(002,200,"Jan,25);
+insert into studentpresent_Prince (recid,studentid,month,present) values(003,300,"Jan",15);
+insert into studentpresent_Prince (recid,studentid,month,present) values(001,100,"Feb",30);
+insert into studentpresent_Prince (recid,studentid,month,present) values(002,200,"Feb",20);
+insert into studentpresent_Prince (recid,studentid,month,present) values(003,300,"Feb",10);
+insert into studentpresent_Prince (recid,studentid,month,present) values(004,400,"Jan",14);
+insert into studentpresent_Prince (recid,studentid,month,present) values(004,400,"Feb",12);
+insert into studentpresent_Prince (recid,studentid,month,present) values(005,500,"Feb",10);
+insert into studentpresent_Prince (recid,studentid,month,present) values(006,600,"Jan",13);
+
+insert into studenthours_Prince (recid,studentid,date,hours) values(001,100,'2022-01-23',3);
+insert into studenthours_Prince (recid,studentid,date,hours) values(002,200,'2022-01-23',5);
+insert into studenthours_Prince (recid,studentid,date,hours) values(003,300,'2022-01-23',6);
+insert into studenthours_Prince (recid,studentid,date,hours) values(001,100,'2022-02-24',9);
+insert into studenthours_Prince (recid,studentid,date,hours) values(002,200,'2022-02-24',6);
+insert into studenthours_Prince (recid,studentid,date,hours) values(003,300,'2022-02-24',5);
+insert into studenthours_Prince (recid,studentid,date,hours) values(004,400,'2022-01-23',7);
+insert into studenthours_Prince (recid,studentid,date,hours) values(004,400,'2022-02-24',8);
+insert into studenthours_Prince (recid,studentid,date,hours) values(005,500,'2022-02-24',8);
+insert into studenthours_Prince (recid,studentid,date,hours) values(006,600,'2022-01-23',5);
+insert into studenthours_Prince (recid,studentid,date,hours) values(006,600,'2022-02-24',8);
+
+// Display Name,Standard and sex using join 
+select student_Prince.name,studentdetail_Prince.standard,studentdetail_Prince.sex from student_Prince inner join studentdetail_Prince on student_Prince.recid=studentdetail_Prince.recid order by student_Prince.name;
+
+// SUM of student hours
+select student_Prince.name as Name,sum(studenthours_Prince.hours) as TotalHours from student_Prince inner join studenthours_Prince on student_Prince.recid=studenthours_Prince.recid group by student_Prince.name;
+
+// Average Present of each student
+select student_Prince.name as Name,avg(studentpresent_Prince.present) as Present from student_Prince inner join studentpresent_Prince on student_Prince.recid=studentpresent_Prince.recid group by student_Prince.name;
+
+// Minimum present among all students
+select min(present) as MinPresent from studentpresent_Prince;
+
+/ Maximum present among all students
+select max(present) as MinPresent from studentpresent_Prince;
+
+// display DD/MM/YY date format
+select student_Prince.name as name,date_format(studenthours_Prince.date,"%d/%m/%y") Date,studenthours_Prince.hours as Hours from student_Prince inner join studenthours_Prince on student_Prince.recid=studenthours_Prince.recid;
+
+// display MM/DD/YY date format
+select student_Prince.name as name,date_format(studenthours_Prince.date,"%m/%d/%y") Date,studenthours_Prince.hours as Hours from student_Prince inner join studenthours_Prince on student_Prince.recid=studenthours_Prince.recid;
+
+// date YYYY-MM-DD date format
+select student_Prince.name as name,date_format(studenthours_Prince.date,"%Y-%m-%d") Date,studenthours_Prince.hours as Hours from student_Prince inner join studenthours_Prince on student_Prince.recid=studenthours_Prince.recid;
+
+// date MM/DD Day date format
+select student_Prince.name as name,date_format(studenthours_Prince.date,"%m/%d %W") Date,studenthours_Prince.hours as Hours from student_Prince inner join studenthours_Prince on student_Prince.recid=studenthours_Prince.recid;
