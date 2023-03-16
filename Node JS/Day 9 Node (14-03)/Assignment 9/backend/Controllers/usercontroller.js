@@ -94,9 +94,11 @@ export const update = async (req,res) => {
 //   PRIMARY KEY (`procode`)
 // ) 
 
+
 // CREATE TABLE  `traineedb`.`prince_pro_cus` (
 //   `recid` int(10) unsigned NOT NULL AUTO_INCREMENT,
 //   `proid` int(10) unsigned NOT NULL,
 //   `cusid` int(10) unsigned NOT NULL,
+//   `qty` int(10) unsigned DEFAULT NULL,
 //   PRIMARY KEY (`recid`)
 // );
