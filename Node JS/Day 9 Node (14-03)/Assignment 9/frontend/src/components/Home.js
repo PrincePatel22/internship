@@ -4,6 +4,7 @@ import Products from "./Products";
 import axios from "axios";
 
 const Home = () => {
+
   const navigation = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -18,6 +19,7 @@ const Home = () => {
     navigation("/Login");
   };
 
+  
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -32,7 +34,14 @@ const Home = () => {
           <button
             className="btn btn-primary"
             type="submit"
-            style={{ marginRight: "80%" }}
+            onClick={() => navigation("/Orders")}
+          >
+            My orders
+          </button>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            style={{ marginRight: "72%" }}
             onClick={() => navigation("/Cart")}
           >
             My cart

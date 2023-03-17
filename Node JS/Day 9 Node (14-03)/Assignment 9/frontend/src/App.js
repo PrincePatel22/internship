@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Update from "./components/Update";
 import Cart from "./components/Cart";
+import Orders from "./components/Orders";
+import Orderview from "./components/Orderview";
 
 function App() {
   const [firstname, setFirstname] = useState("");
@@ -26,6 +28,8 @@ function App() {
           <Route exact path="/Cart" element={<Cart />}></Route>
           <Route exact path="/Home" element={<Home />}></Route>
           <Route exact path="/Login" element={<Login />}></Route>
+          <Route exact path="/Orders" element={<Orders />}></Route>
+          <Route exact path="/Orderview" element={<Orderview />}></Route>
           <Route
             exact
             path="/Profile"

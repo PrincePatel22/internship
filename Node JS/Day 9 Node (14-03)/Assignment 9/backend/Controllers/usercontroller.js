@@ -60,16 +60,15 @@ export const userprofile = async (req, res) => {
   }
 };
 
-export const update = async (req,res) => {
-    try {
-        const query = `UPDATE prince_customer SET firstname="${req.body.firstname}",lastname="${req.body.lastname}",phone="${req.body.phone}",gender="${req.body.gender}",dob="${req.body.dob}",password="${req.body.password}",address="${req.body.address}" WHERE email="${req.body.email}"`;
-        dbConn.query(query);
-        res.send("Data Updated Successfully");
-    } catch (error) {
-         console.log(error);
-    }
-}
-
+export const update = async (req, res) => {
+  try {
+    const query = `UPDATE prince_customer SET firstname="${req.body.firstname}",lastname="${req.body.lastname}",phone="${req.body.phone}",gender="${req.body.gender}",dob="${req.body.dob}",password="${req.body.password}",address="${req.body.address}" WHERE email="${req.body.email}"`;
+    dbConn.query(query);
+    res.send("Data Updated Successfully");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // CREATE TABLE  `traineedb`.`prince_customer` (
 //   `customerid` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -92,13 +91,29 @@ export const update = async (req,res) => {
 //   `proprice` float NOT NULL,
 //   `status` varchar(50) NOT NULL,
 //   PRIMARY KEY (`procode`)
-// ) 
-
+// )
 
 // CREATE TABLE  `traineedb`.`prince_pro_cus` (
 //   `recid` int(10) unsigned NOT NULL AUTO_INCREMENT,
 //   `proid` int(10) unsigned NOT NULL,
 //   `cusid` int(10) unsigned NOT NULL,
 //   `qty` int(10) unsigned DEFAULT NULL,
+//   PRIMARY KEY (`recid`)
+// );
+
+// CREATE TABLE  `traineedb`.`prince_order` (
+//   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//   `date` varchar(20) NOT NULL,
+//   PRIMARY KEY (`id`)
+// );
+
+// CREATE TABLE  `traineedb`.`prince_orderdetails` (
+//   `recid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//   `ordid` int(11) NOT NULL,
+//   `procode` int(11) NOT NULL,
+//   `proname` varchar(100) NOT NULL,
+//   `proprice` float NOT NULL,
+//   `qty` int(11) NOT NULL,
+//   `total` varchar(45) NOT NULL,
 //   PRIMARY KEY (`recid`)
 // );
