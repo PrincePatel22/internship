@@ -4,7 +4,6 @@ import Products from "./Products";
 import axios from "axios";
 
 const Home = () => {
-
   const navigation = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -19,7 +18,6 @@ const Home = () => {
     navigation("/Login");
   };
 
-  
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">

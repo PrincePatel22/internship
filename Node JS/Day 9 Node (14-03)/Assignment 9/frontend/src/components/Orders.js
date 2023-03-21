@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Orders = () => {
-    const [orders,setOrders] = useState();
+  const navigation = useNavigate();
 
-  const orderview = async () => {
+  const [data, setData] = useState();
+
+  const order = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/orderview/" + params.id);
-      setOrders(res.data);
-      console.log(res.data);
+      const res = await axios.get("http://localhost:8000/orders");
+      setData(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const orderview = (id) => {
+    navigation("/Orderview/" + id);
+  };
+
+  useEffect(() => {
+    order();
+  }, []);
+
   return (
     <div>
+      <h2 style={{ textAlign: "center" }}>My Orders</h2>
       <table className="table">
         <thead>
           <tr>
@@ -23,13 +37,25 @@ const Orders = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <input type="submit" className="btn btn-primary" value="view" onclick/>
-            </td>
-          </tr>
+          {data &&
+            data.map((items) => {
+              return (
+                <tr>
+                  <td>ORD000 {items.id}</td>
+                  <td>{items.date}</td>
+                  <td>
+                    <input
+                      type="submit"
+                      className="btn btn-primary"
+                      value="view"
+                      onClick={() => {
+                        orderview(items.id);
+                      }}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

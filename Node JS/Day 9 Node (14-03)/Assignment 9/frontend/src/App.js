@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/Home" element={<Home />}></Route>
           <Route exact path="/Login" element={<Login />}></Route>
           <Route exact path="/Orders" element={<Orders />}></Route>
-          <Route exact path="/Orderview" element={<Orderview />}></Route>
+          <Route exact path="/Orderview/:id" element={<Orderview />}></Route>
           <Route
             exact
             path="/Profile"

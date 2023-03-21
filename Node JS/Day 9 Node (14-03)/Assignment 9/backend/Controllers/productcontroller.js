@@ -144,11 +144,23 @@ export const addorder = async (req, res) => {
 };
 
 export const orderview = async (req, res) => {
-  let sql = `select a.recid, a.date, b.procode, b.proname, b.proprice, b.qty, b.total from prince_order a inner join prince_orderdetails b on a.recid = b.ordid where b.ordid = "${req.params.id}"`;
-  con.query(sql, (err, resulte) => {
+  let sql = `select a.id, DATE_FORMAT(a.date,"%d/%m/%y") as date, b.procode, b.proname, b.proprice, b.qty, b.total from prince_order a inner join prince_orderdetails b on a.id = b.ordid where b.ordid = "${req.params.id}"`;
+  dbConn.query(sql, (err, result) => {
     if (err) throw err;
-    console.log(resulte);
-    res.send(resulte);
+    console.log(result);
+    res.send(result);
   });
 };
 
+export const orders = async (req, res) => {
+  let query = `select * from prince_order`;
+  try {
+    dbConn.query(query, (error, result) => {
+      if (error) throw error;
+      res.send(result);
+      console.log(result);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
