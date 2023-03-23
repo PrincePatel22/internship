@@ -1,4 +1,4 @@
-import { react, useState } from "react";
+import { react, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ const Addemployee = () => {
   const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("");
   const [location, setLocation] = useState("");
+  const [loc,setLoc] = useState("");
   const [address, setAddress] = useState("");
 
   const addEmployee = async (event) => {
@@ -35,7 +36,7 @@ const Addemployee = () => {
         email: email,
         phone: phone,
         gender: gender,
-        location: location,
+        location: loc,
         address: address,
       });
       console.log(response.data);
@@ -45,10 +46,24 @@ const Addemployee = () => {
     }
   };
 
+  const getaddress = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/getaddress");
+      setLocation(response.data)
+      setLoc(response.data[0].address);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getaddress();
+  }, []);
+
   return (
     <div>
       <form className="form-right">
-        <h2 className="text-uppercase">Registration form</h2>
+        <h2 className="text-uppercase">Add Employee</h2>
         <div className="col-sm-6 mb-3">
           <label>First Name </label>
           <input
@@ -130,13 +145,13 @@ const Addemployee = () => {
             className="form-select"
             name="location"
             onChange={(e) => {
-              setLocation(e.target.value);
+              setLoc(e.target.value);
             }}
           >
-            <option value="default">Select location</option>
-            <option value="sola">Sola</option>
-            <option value="maninagar">Maninagar</option>
-            <option value="sahibag">Sahibag</option>
+            {location &&
+              location.map((items) => {
+                return <option value={items.address}>{items.address}</option>;
+              })}
           </select>
         </div>
         <div className="mb-3">

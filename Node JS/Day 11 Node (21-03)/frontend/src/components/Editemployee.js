@@ -1,4 +1,4 @@
-import { react, useState } from "react";
+import { react, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,8 @@ const Editemployee = (props) => {
   const [email, setEmail] = useState(props.updateUser.email);
   const [phone, setPhone] = useState(props.updateUser.phone);
   const [gender, setGender] = useState(props.updateUser.gender);
-  const [location, setLocation] = useState(props.updateUser.location);
+  const [location, setLocation] = useState([]);
+  const [loc, setLoc] = useState(props.updateUser.location);
   const [address, setAddress] = useState(props.updateUser.address);
 
   const updateEmployee = async (event) => {
@@ -36,7 +37,7 @@ const Editemployee = (props) => {
         email: email,
         phone: phone,
         gender: gender,
-        location: location,
+        location: loc,
         address: address,
       });
       console.log(response.data);
@@ -45,11 +46,22 @@ const Editemployee = (props) => {
       console.log(error);
     }
   };
+  const getaddress = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/getaddress");
+      setLocation(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    getaddress();
+  }, []);
   return (
     <div>
       <form className="form-right">
-        <h2 className="text-uppercase">Registration form</h2>
+        <h2 className="text-uppercase">Edit Employee</h2>
         <div className="col-sm-6 mb-3">
           <label>First Name </label>
           <input
@@ -148,13 +160,13 @@ const Editemployee = (props) => {
             name="location"
             defaultValue={props.updateUser && props.updateUser.work_location}
             onChange={(e) => {
-              setLocation(e.target.value);
+              setLoc(e.target.value);
             }}
           >
-            <option value="default">Select location</option>
-            <option value="sola">Sola</option>
-            <option value="maninagar">Maninagar</option>
-            <option value="sahibag">Sahibag</option>
+            {location &&
+              location.map((items) => {
+                return <option value={items.address}>{items.address}</option>;
+              })}
           </select>
         </div>
         <div className="mb-3">

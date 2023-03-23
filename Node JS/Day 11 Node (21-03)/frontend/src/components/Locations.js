@@ -1,10 +1,34 @@
-import { react, useState } from "react";
+import { react, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Locations = () => {
+const Locations = (props) => {
   const navigation = useNavigate();
   const [locations, setLocations] = useState("");
+
+  const getLocation = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/getlocation");
+      let data = response.data;
+      setLocations(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteLocation = async (id) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/deletelocation",
+        { id: id }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   return (
     <div>
@@ -36,27 +60,28 @@ const Locations = () => {
             locations.map((items) => {
               return (
                 <tr>
-                  <td>{}</td> 
-                  <td>{}</td>
-                  <td>{}</td>
-                  <td>{}</td>
-                  <td>{}</td>
+                  <td>{items.recid}</td>
+                  <td>{items.building_id}</td>
+                  <td>{items.address}</td>
+                  <td>{items.zipcode}</td>
+                  <td>{items.manager}</td>
                   <td>
                     <input
-                      type="submit"
+                      type="button"
                       className="btn btn-primary"
                       value="Edit"
                       onClick={() => {
-                        props.setUpdateUser(items);
+                        props.setUpdateLocation(items);
                         navigation("/Editlocation");
                       }}
                     />
                   </td>
                   <td>
                     <input
-                      type="submit"
+                      type="button"
                       className="btn btn-danger"
                       value="X"
+                      onClick={() => deleteLocation(items.recid)}
                     />
                   </td>
                 </tr>

@@ -72,3 +72,17 @@ export const updateemployee = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getaddress = async (req, res) => {
+  try {
+    dbConn.query(
+      `SELECT address FROM prince_locations`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

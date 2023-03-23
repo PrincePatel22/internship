@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 const Home = (props) => {
   const navigation = useNavigate();
   const [employees, setEmployees] = useState("");
@@ -11,7 +10,6 @@ const Home = (props) => {
       const response = await axios.get("http://localhost:8000/getemployee");
       let data = response.data;
       setEmployees(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +39,7 @@ const Home = (props) => {
               className="btn btn-primary"
               type="submit"
               style={{ marginLeft: "80%" }}
+              onClick={() => navigation("/Hr")}
             >
               HR
             </button>
@@ -102,7 +101,7 @@ const Home = (props) => {
                   <td>{items.work_location}</td>
                   <td>
                     <input
-                      type="submit"
+                      type="button"
                       className="btn btn-primary"
                       value="Edit"
                       onClick={() => {
@@ -113,7 +112,7 @@ const Home = (props) => {
                   </td>
                   <td>
                     <input
-                      type="submit"
+                      type="button"
                       className="btn btn-danger"
                       value="X"
                       onClick={() => deleteEmployee(items.emp_id)}
