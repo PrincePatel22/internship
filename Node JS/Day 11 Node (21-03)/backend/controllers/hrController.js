@@ -51,3 +51,17 @@ export const deletehr = async (req, res) => {
     console.log(error);
   }
 };
+export const updatehr = async (req, res) => {
+  console.log(req.body);
+  try {
+    dbConn.query(
+      `UPDATE prince_hr SET emp_id="${req.body.emp_id}",payroll="${req.body.payroll}",security_no="${req.body.security_no}",salary="${req.body.salary}" WHERE recid="${req.body.recid}"`,
+      (err, result) => {
+        if (err) throw err;
+        res.send("Data updated");
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

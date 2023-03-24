@@ -15,9 +15,9 @@ function App() {
   const [updateLocation, setUpdateLocation] = useState();
   const [updatehr, setUpdatehr] = useState();
 
-  // useEffect(() => {
-  //   console.log(updateLocation);
-  // }, [updateLocation]);
+  useEffect(() => {
+    console.log(updatehr);
+  }, [updatehr]);
   return (
     <div className="App">
       <Router>

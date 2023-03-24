@@ -1,9 +1,48 @@
-import React from 'react'
+import { react, useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Edithr = (props) => {
-    const [payroll, setPayroll] = useState(props.u);
-    const [securityno, setSecurityno] = useState("");
-    const [salary, setSalary] = useState("");
+  const navigation = useNavigate();
+  const [payroll, setPayroll] = useState(
+    props.updatehr && props.updatehr.payroll
+  );
+  const [securityno, setSecurityno] = useState(
+    props.updatehr && props.updatehr.securityno
+  );
+  const [salary, setSalary] = useState(props.updatehr && props.updatehr.salary);
+  const [emp, setEmp] = useState(props.updatehr && props.updatehr.emp_id);
+  const [employee, setEmployee] = useState([]);
+
+  const getemployeeid = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/getemployeeid");
+      setEmployee(response.data);
+      setEmp(response.data[0].emp_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updatehr = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8000/updatehr", {
+        recid: props.updatehr.recid,
+        emp_id: props.updatehr.emp_id,
+        payroll: payroll,
+        security_no: securityno,
+        salary: salary,
+      });
+      navigation("/Hr");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getemployeeid();
+  }, []);
+
   return (
     <form className="form-right">
       <h2 className="text-uppercase">Edit Record</h2>
@@ -11,6 +50,7 @@ const Edithr = (props) => {
         className="form-select"
         style={{ width: "100px" }}
         name="empid"
+        value={props.updatehr && props.updatehr.emp_id}
         onChange={(e) => {
           setEmp(e.target.value);
         }}
@@ -27,6 +67,7 @@ const Edithr = (props) => {
           name="payroll"
           id="payroll"
           className="input-field"
+          defaultValue={props.updatehr && props.updatehr.payroll}
           onChange={(e) => {
             setPayroll(e.target.value);
           }}
@@ -39,6 +80,7 @@ const Edithr = (props) => {
           name="security_no"
           id="security_no"
           className="input-field"
+          defaultValue={props.updatehr && props.updatehr.security_no}
           onChange={(e) => {
             setSecurityno(e.target.value);
           }}
@@ -51,6 +93,7 @@ const Edithr = (props) => {
           name="salary"
           id="salary"
           className="input-field"
+          defaultValue={props.updatehr && props.updatehr.salary}
           onChange={(e) => {
             setSalary(e.target.value);
           }}
@@ -62,11 +105,11 @@ const Edithr = (props) => {
           value="Submit"
           className="register"
           name="Submit"
-          onClick={addHr}
+          onClick={updatehr}
         />
       </div>
     </form>
   );
-}
+};
 
 export default Edithr;

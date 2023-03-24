@@ -16,7 +16,7 @@ import {
   addhr,
   getemployeeid,
   gethr,
-  deletehr,
+  deletehr,updatehr
 } from "../controllers/hrController.js";
 
 const router = express.Router();
@@ -36,5 +36,6 @@ router.get("/getemployeeid", getemployeeid);
 router.post("/addhr", addhr);
 router.get("/gethr", gethr);
 router.post("/deletehr", deletehr);
+router.post("/updatehr",updatehr);
 
 export default router;

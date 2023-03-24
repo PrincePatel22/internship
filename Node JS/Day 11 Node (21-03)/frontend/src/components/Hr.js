@@ -10,11 +10,11 @@ const Hr = (props) => {
      const response = await axios.get("http://localhost:8000/gethr");
      let data = response.data;
      setHr(data);
-     console.log(data);
    } catch (error) {
      console.log(error);
    }
  };
+
  const deleteHr = async (id) => {
    try {
      const response = await axios.post("http://localhost:8000/deletehr", {
@@ -24,6 +24,7 @@ const Hr = (props) => {
      console.log(error);
    }
  };
+ 
  useEffect(() => {
    getHr();
  }, []);
@@ -47,7 +48,7 @@ const Hr = (props) => {
             <th scope="col">Payroll</th>
             <th scope="col">Security Number</th>
             <th scope="col">Salary</th>
-            <th scope="col" rowSpan={2}>
+            <th scope="col" rowSpan={2} style={{textAlign:"center"}}>
               Action
             </th>
           </tr>
@@ -68,6 +69,7 @@ const Hr = (props) => {
                       value="Edit"
                       onClick={() => {
                         props.setUpdatehr(items);
+                        console.log(props.setUpdatehr);
                         navigation("/Edithr");
                       }}
                     />
