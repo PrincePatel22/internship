@@ -25,5 +25,6 @@ export default dbConn;
 //   `dateadded` datetime DEFAULT NULL,
 //   `dateupdated` datetime DEFAULT NULL,
 //   `endeffdt` datetime DEFAULT NULL,
+//   `delstatus` varchar(10) DEFAULT NULL,
 //   PRIMARY KEY (`recid`)
-// ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+// ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
