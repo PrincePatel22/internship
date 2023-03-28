@@ -88,10 +88,10 @@ export const editUser = async (req, res) => {
 //   console.log(req.body, req.file);
   try {
     dbConn.query(
-      `update prince_final set firstname="${req.body.firstname}",lastname="${req.body.lastname}",email="${req.body.email}",gender="${req.body.gender}",hobbies="${req.body.hobbies}",photo="${req.file.originalname}",country="${req.body.country}",dateupdated=concat(curdate()," ",curtime()) where recid="${req.params.id}"`,
+      `update prince_final set firstname="${req.body.firstname}",lastname="${req.body.lastname}",email="${req.body.email}",gender="${req.body.gender}",hobbies="${req.body.hobbies}",photo="${req.file && req.file.originalname}",country="${req.body.country}",dateupdated=concat(curdate()," ",curtime()) where recid="${req.params.id}"`,
       (err, result) => {
         if (err) throw err;
-        res.send(200);
+        res.sendStatus(200);
       }
     );
   } catch (error) {

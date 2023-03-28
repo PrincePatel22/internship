@@ -19,16 +19,44 @@ const Edituser = () => {
   };
   const handleEdit = async (event) => {
     event.preventDefault();
-
     const data = new FormData(event.target);
-    try {
-      const res = await axios.put(
-        "http://localhost:8000/edituser/" + localStorage.getItem("ID"),
-        data
-      );
-      navigation("/");
-    } catch (error) {
-      console.log(error);
+    if (
+      !event.target.code.value.match(/^[0-9A-Za-z]+$/) ||
+      event.target.code.value == ""
+    ) {
+      return alert("Please enter code");
+    } else if (
+      !event.target.firstname.value.match(/^[A-Za-z]+$/) ||
+      event.target.firstname.value == ""
+    ) {
+      return alert("Please enter first name");
+    } else if (
+      !event.target.lastname.value.match(/^[A-Za-z]+$/) ||
+      event.target.lastname.value == ""
+    ) {
+      return alert("Please enter last name");
+    } else if (event.target.email.value == "") {
+      return alert("Please enter Your email");
+    } else if (
+      !event.target.email.value.match(
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      )
+    ) {
+      return alert("Please enter valid email");
+    } else if (event.target.gender.value == "") {
+      return alert("Please select Gender");
+    } else if (event.target.country.value == "Select Country") {
+      return alert("Please select your Country");
+    } else {
+      try {
+        const res = await axios.put(
+          "http://localhost:8000/edituser/" + localStorage.getItem("ID"),
+          data
+        );
+        navigation("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {

@@ -32,7 +32,7 @@ const Profile = () => {
           navigation("/");
         }}
       >
-        <VscChevronLeft size={25}/>
+        <VscChevronLeft size={25} />
       </button>
       {user && (
         <table
@@ -85,7 +85,9 @@ const Profile = () => {
             </tr>
             <tr>
               <th>Status</th>
-              <td>{user.state == "Y" ? <td>Active</td> : <td>Inactive</td>}</td>
+              <td>
+                {user.status == "Y" ? <td>Active</td> : <td>Inactive</td>}
+              </td>
             </tr>
           </tbody>
         </table>

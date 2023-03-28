@@ -1,18 +1,37 @@
 import { react, useEffect, useState } from "react";
+import "../App.css";
 import axios from "axios";
 import { FaUserEdit, FaUserMinus, FaUser, FaUserPlus } from "react-icons/fa";
 import { CiImport, CiExport } from "react-icons/ci";
+import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigation = useNavigate();
   const [users, setUsers] = useState();
 
+  const [filterUser, setFilterUser] = useState();
+  const [search, setSearch] = useState("");
+  const [gender, setGender] = useState("");
+  const [hobbies, setHobbies] = useState("");
+  const [status, setStatus] = useState("");
+
+  const result = filterUser && filterUser.length;
+  const [currentPage, setCurrentPage] = useState(0);
+  const PER_PAGE = 3;
+  const offset = currentPage * PER_PAGE;
+  const pageCount = Math.ceil(result / PER_PAGE);
+
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
+
   const getUsers = async () => {
     try {
       const res = await axios.get("http://localhost:8000/getusers");
       console.log(res.data);
       setUsers(res.data);
+      setFilterUser(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -51,8 +70,119 @@ const Home = () => {
     navigation("/Edituser");
   };
 
+  const handleExport = async () => {
+    try {
+      let res = await axios.post("http://localhost:8000/exportusers", {
+        users: users,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleImport = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/importusers");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const searchFilter = () => {
+    let temp = [];
+    if (search == "") {
+      setFilterUser(users);
+    } else {
+      for (let i = 0; i < filterUser.length; i++) {
+        if (filterUser[i].name.toLowerCase().includes(search.toLowerCase())) {
+          temp.push(filterUser[i]);
+        }
+      }
+      setFilterUser(temp);
+    }
+  };
+
+  const statusFilter = () => {
+    if (filterUser) {
+      let temp = [];
+      for (let i = 0; i < filterUser.length; i++) {
+        if (filterUser[i].status == "Y" && status == "Active") {
+          temp.push(filterUser[i]);
+        } else if (filterUser[i].status == "N" && status == "Inactive") {
+          temp.push(filterUser[i]);
+        }
+      }
+      setFilterUser(temp);
+    }
+  };
+
+  const handleHobbies = () => {
+    let temp = [];
+    const hobbies = document.getElementsByName("hobbies");
+    for (let i = 0; i < hobbies.length; i++) {
+      if (hobbies[i].checked == true) {
+        temp.push(hobbies[i].value);
+      }
+    }
+    setHobbies(temp);
+  };
+
+  const handleReset = () => {
+    setFilterUser(users);
+  };
+
+  useEffect(() => {
+    statusFilter();
+  }, [status]);
+
+  useEffect(() => {
+    searchFilter();
+  }, [search]);
+
+  useEffect(() => {
+    let temp = [];
+    if (gender == "") {
+      temp = filterUser;
+    } else {
+      if (gender == "F" || gender == "M") {
+        for (let i = 0; i < filterUser.length; i++) {
+          if (filterUser[i].gender == gender) {
+            temp.push(filterUser[i]);
+          }
+        }
+      } else {
+        temp = filterUser;
+      }
+    }
+    setFilterUser(temp);
+  }, [gender]);
+
+  useEffect(() => {
+    let search = filterUser;
+    let temp = [];
+    for (let i = 0; i < hobbies.length; i++) {
+      for (let j = 0; j < search.length; j++) {
+        if (
+          search[j].hobbies.toLowerCase().includes(hobbies[i].toLowerCase())
+        ) {
+          temp.push(search[j]);
+        }
+      }
+      search = temp;
+    }
+    setFilterUser(search);
+  }, [hobbies]);
+
   useEffect(() => {
     getUsers();
+    var checkList = document.getElementById("list1");
+    checkList.getElementsByClassName("anchor")[0].onclick = (event) => {
+      if (checkList.classList.contains("visible"))
+        checkList.classList.remove("visible");
+      else {
+        checkList.classList.add("visible");
+      }
+    };
   }, []);
 
   return (
@@ -63,8 +193,8 @@ const Home = () => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => navigation("/Adduser")}
             style={{ marginRight: "10px" }}
+            onClick={handleExport}
           >
             <CiExport /> Export User
           </button>
@@ -72,6 +202,10 @@ const Home = () => {
             type="button"
             className="btn btn-primary"
             style={{ marginRight: "10px" }}
+            onClick={() => {
+              handleImport();
+              getUsers();
+            }}
           >
             <CiImport /> Import Users
           </button>
@@ -84,9 +218,152 @@ const Home = () => {
           </button>
         </div>
       </nav>
+      <div
+        style={{
+          margin: "70px 10px 5px 10px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search"
+          name="search"
+          id="search"
+          className="form-control col-md-3"
+          style={{ width: "15%" }}
+          onChange={(e) => setSearch(e.target.value)}
+        ></input>
+        &nbsp; &nbsp;
+        <div>
+          <input
+            type="radio"
+            id="male"
+            className="m-1"
+            name="gender"
+            value="M"
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Male
+          <input
+            type="radio"
+            id="female"
+            className="m-1"
+            name="gender"
+            value="F"
+            onChange={(e) => setGender(e.target.value)}
+          />
+          Female
+          <input
+            type="radio"
+            id="all"
+            className="m-1"
+            name="gender"
+            value="A"
+            onChange={(e) => {
+              setGender(e.target.value);
+              getUsers();
+            }}
+          />
+          All
+        </div>
+        &nbsp; &nbsp;
+        <div id="list1" class="dropdown-check-list">
+          <span class="anchor">Select hobbies</span>
+          <ul class="items">
+            <li>
+              <input
+                type="checkbox"
+                id="Reading"
+                name="hobbies"
+                value="Reading"
+                onChange={handleHobbies}
+              />
+              Reading
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="Travelling"
+                name="hobbies"
+                value="Travelling"
+                onChange={handleHobbies}
+              />
+              Travelling
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="Football"
+                name="hobbies"
+                value="Football"
+                onChange={handleHobbies}
+              />
+              Football
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="Cricket"
+                name="hobbies"
+                value="Cricket"
+                onChange={handleHobbies}
+              />
+              Cricket
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="Dancing"
+                name="hobbies"
+                value="Dancing"
+                onChange={handleHobbies}
+              />
+              Dancing
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="Singing"
+                name="hobbies"
+                value="Singing"
+                onChange={handleHobbies}
+              />
+              Singing
+            </li>
+          </ul>
+        </div>
+        &nbsp; &nbsp;
+        <div>
+          <select
+            id="status"
+            name="status"
+            className="form-control"
+            onChange={(e) => {
+              setStatus(e.target.value);
+            }}
+          >
+            <option defaultChecked value="Filter by status">
+              Filter by status
+            </option>
+            <option id="active" value="Active">
+              Active
+            </option>
+            <option id="inactive" value="Inactive">
+              Inactive
+            </option>
+          </select>
+        </div>
+        &nbsp;&nbsp;
+        <div>
+          <button type="reset" className="btn btn-danger" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
+      </div>
       <table
         className="table table-striped table-bordered"
-        style={{ margin: "70px 10px 10px 10px" }}
+        style={{ margin: "40px 10px 10px 10px" }}
       >
         <thead className="bg-dark text-light text-center">
           <th>Code</th>
@@ -101,8 +378,8 @@ const Home = () => {
           <th>action</th>
         </thead>
 
-        {users &&
-          users.map((items) => {
+        {filterUser &&
+          filterUser.map((items) => {
             return (
               <tbody className="text-center">
                 <td>{items.code}</td>
@@ -127,7 +404,7 @@ const Home = () => {
                   <td>
                     <button
                       type="button"
-                      class="btn btn-link"
+                      className="btn btn-link"
                       style={{ textDecoration: "none" }}
                       onClick={() => {
                         handleStatus(items.recid, items.status);
@@ -141,7 +418,7 @@ const Home = () => {
                   <td>
                     <button
                       type="button"
-                      class="btn btn-link "
+                      className="btn btn-link "
                       style={{ textDecoration: "none" }}
                       onClick={() => {
                         handleStatus(items.recid, items.status);
@@ -181,6 +458,20 @@ const Home = () => {
             );
           })}
       </table>
+      <br />
+      <br />
+      <br />
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={handlePageClick}
+        containerClassName={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName={"nextBttn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      />
     </div>
   );
 };
