@@ -23,18 +23,26 @@ const Addhr = () => {
   const addHr = async (event) => {
     event.preventDefault();
 
-    try {
-      console.log(emp);
-      let response = await axios.post("http://localhost:8000/addhr", {
-        emp_id: emp,
-        payroll: payroll,
-        securityno: securityno,
-        salary: salary,
-      });
-      console.log(response.data);
-      navigation("/Hr");
-    } catch (error) {
-      console.log(error);
+    if (payroll == "") {
+      alert("Payroll is required");
+    } else if (securityno == "") {
+      alert("Security Number is required");
+    } else if (salary == "") {
+      alert("Salary is required");
+    } else {
+      try {
+        console.log(emp);
+        let response = await axios.post("http://localhost:8000/addhr", {
+          emp_id: emp,
+          payroll: payroll,
+          securityno: securityno,
+          salary: salary,
+        });
+        console.log(response.data);
+        navigation("/Hr");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {

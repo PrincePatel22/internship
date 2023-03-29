@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Products = () => {
+const Products = (props) => {
   const navigation = useNavigate();
-
+  const [filterProduct, setFilterProduct] = useState();
   const [products, setProducts] = useState("");
   const [cart, setCart] = useState("");
 
@@ -22,8 +22,7 @@ const Products = () => {
           headers: { token: localStorage.getItem("token") },
         }
       );
-    }
-    if (status == "inactive") {
+    } else {
       alert("Product is not available");
     }
   };
@@ -35,10 +34,35 @@ const Products = () => {
       let data = response.data;
       console.log(data);
       setProducts(data);
+      setFilterProduct(data);
     } catch (error) {
       console.log(error);
     }
   };
+  const searchFilter = () => {
+    let temp = [];
+    let search = props.search;
+    if (search == "") {
+      setFilterProduct(products);
+    } else {
+      for (let i = 0; i < filterProduct.length; i++) {
+        if (
+          filterProduct[i].proname
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          filterProduct[i].procode == search
+        ) {
+          temp.push(filterProduct[i]);
+        }
+      }
+      setFilterProduct(temp);
+    }
+  };
+
+  useEffect(() => {
+    searchFilter();
+  }, [props.search]);
+
   return (
     <div>
       <table className="table" style={{ margin: "80px 20px 10px 10px" }}>
@@ -53,8 +77,8 @@ const Products = () => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          {products &&
-            products.map((items) => {
+          {filterProduct &&
+            filterProduct.map((items) => {
               return (
                 <tr>
                   <td>{items.procode}</td>

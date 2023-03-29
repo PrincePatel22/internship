@@ -19,7 +19,7 @@ export const addUser = async (req, res) => {
 export const getUsers = async (req, res) => {
   try {
     dbConn.query(
-      `select recid,code,concat(firstname," ",lastname) as name,email,gender,hobbies,photo,country,status,date_format(dateadded,"%d/%m/%Y %h:%i:%s") as dateadded,dateupdated,endeffdt from prince_final where delstatus="1"`,
+      `select recid,code,concat(firstname," ",lastname) as name,email,gender,hobbies,photo,country,status,date_format(dateadded,"%d/%m/%Y %h:%i:%s") as dateadded,dateupdated,endeffdt from prince_final where delstatus="1" order by code`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -85,10 +85,18 @@ export const updateStatus = async (req, res) => {
 };
 
 export const editUser = async (req, res) => {
-//   console.log(req.body, req.file);
+  //   console.log(req.body, req.file);
   try {
     dbConn.query(
-      `update prince_final set firstname="${req.body.firstname}",lastname="${req.body.lastname}",email="${req.body.email}",gender="${req.body.gender}",hobbies="${req.body.hobbies}",photo="${req.file && req.file.originalname}",country="${req.body.country}",dateupdated=concat(curdate()," ",curtime()) where recid="${req.params.id}"`,
+      `update prince_final set firstname="${req.body.firstname}",lastname="${
+        req.body.lastname
+      }",email="${req.body.email}",gender="${req.body.gender}",hobbies="${
+        req.body.hobbies
+      }",photo="${req.file && req.file.originalname}",country="${
+        req.body.country
+      }",dateupdated=concat(curdate()," ",curtime()) where recid="${
+        req.params.id
+      }"`,
       (err, result) => {
         if (err) throw err;
         res.sendStatus(200);

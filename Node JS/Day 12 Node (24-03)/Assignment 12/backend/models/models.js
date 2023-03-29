@@ -10,7 +10,7 @@ const dbConn = mysql.createConnection({
 export default dbConn;
 
 // Table used
-// DROP TABLE IF EXISTS `traineedb`.`prince_final`;
+
 // CREATE TABLE  `traineedb`.`prince_final` (
 //   `recid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 //   `code` char(6) DEFAULT NULL,
@@ -27,4 +27,4 @@ export default dbConn;
 //   `endeffdt` datetime DEFAULT NULL,
 //   `delstatus` varchar(10) DEFAULT NULL,
 //   PRIMARY KEY (`recid`)
-// ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+// );

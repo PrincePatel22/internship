@@ -3,33 +3,34 @@ import Header from "./Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-function Category() {
+const Category = () => {
+  const navigation = useNavigate();
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  const navigate = useNavigate();
-  const [ans, setAns] = useState("");
+  const [data, setData] = useState("");
 
-  function getParent() {
-    axios.get("http://localhost:8000/getparent").then((res) => {
-      const ans = res.data;
-      console.log(res.data);
-      setAns(ans);
-    });
-  }
+  const getParent = async () => {
+    try {
+      let res = await axios.get("http://localhost:8000/getparent");
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  function addCategory() {
-    axios
-      .post("http://localhost:8000/addcategory", {
+  const addCategory = async () => {
+    try {
+      let res = await axios.post("http://localhost:8000/addcategory", {
         category: category,
         name: name,
         type: type,
-      })
-      .then((res) => {
-        navigate("/");
       });
-  }
+      navigation("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getParent();
   }, []);
@@ -37,9 +38,20 @@ function Category() {
   return (
     <div>
       <Header />
-      <div>
-        <form className="category" onSubmit={addCategory}>
-          <h3>Category Form</h3>
+      <div
+        style={{
+          marginLeft: "10px",
+          marginTop: "20px",
+          display: "flex",
+          alignItems: "start",
+        }}
+      >
+        <form
+          className="category"
+          onSubmit={addCategory}
+          style={{ marginLeft: "20px" }}
+        >
+          <h3>Add Category</h3>
           <div className="form-group">
             <label htmlFor="type">Category Type: </label>&nbsp;
             <input
@@ -94,8 +106,8 @@ function Category() {
                 }}
               >
                 <option value="select">--Select--</option>
-                {ans.length > 0 ? (
-                  ans.map((item, index) => (
+                {data.length > 0 ? (
+                  data.map((item, index) => (
                     <option key={index} value={item.id}>
                       {item.name}
                     </option>
@@ -113,6 +125,6 @@ function Category() {
       </div>
     </div>
   );
-}
+};
 
 export default Category;

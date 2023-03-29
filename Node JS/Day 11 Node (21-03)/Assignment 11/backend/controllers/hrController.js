@@ -3,7 +3,7 @@ import dbConn from "../Models/models.js";
 export const getemployeeid = async (req, res) => {
   try {
     dbConn.query(
-      `SELECT emp_id FROM prince_emp WHERE delstatus=0`,
+      `SELECT emp_id FROM prince_emp WHERE delstatus=1`,
       (err, result) => {
         if (err) throw err;
         res.send(result);

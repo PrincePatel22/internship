@@ -6,11 +6,17 @@ const Editlocation = (props) => {
   const navigation = useNavigate();
 
   const [buildingid, setBuildingid] = useState(
-    props.updateLocation.building_id
+    props.updateLocation && props.updateLocation.building_id
   );
-  const [address, setAddress] = useState(props.updateLocation.address);
-  const [zipcode, setZipcode] = useState(props.updateLocation.zipcode);
-  const [manager, setManager] = useState(props.updateLocation.manager);
+  const [address, setAddress] = useState(
+    props.updateLocation && props.updateLocation.address
+  );
+  const [zipcode, setZipcode] = useState(
+    props.updateLocation && props.updateLocation.zipcode
+  );
+  const [manager, setManager] = useState(
+    props.updateLocation && props.updateLocation.manager
+  );
 
   const editLocation = async (event) => {
     event.preventDefault();

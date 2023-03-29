@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Home = () => {
   const navigation = useNavigate();
+  const [search,setSearch] = useState("");
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigation("/Home");
@@ -39,11 +40,20 @@ const Home = () => {
           <button
             className="btn btn-primary"
             type="submit"
-            style={{ marginRight: "72%" }}
+            style={{ marginRight: "50%" }}
             onClick={() => navigation("/Cart")}
           >
             My cart
           </button>
+          <input
+            type="text"
+            placeholder="Search"
+            name="search"
+            id="search"
+            className="form-control col-md-3"
+            style={{ width: "15%" }}
+            onChange={(e) => setSearch(e.target.value)}
+          ></input>
           <button
             className="btn btn-danger"
             type="submit"
@@ -54,7 +64,7 @@ const Home = () => {
         </div>
       </nav>
       <div>
-        <Products />
+        <Products search={search} />
       </div>
     </div>
   );

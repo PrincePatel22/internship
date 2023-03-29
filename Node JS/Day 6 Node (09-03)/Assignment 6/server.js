@@ -67,3 +67,13 @@ app.delete("/delete", (req, res) => {
 app.listen(8000, () => {
   console.log("Server is listening on port 8000.");
 });
+
+// Table used
+
+// CREATE TABLE  `traineedb`.`movies_prince` (
+//   `id` int(11) DEFAULT NULL,
+//   `name` varchar(255) DEFAULT NULL,
+//   `genre` varchar(255) DEFAULT NULL,
+//   `rating` float DEFAULT NULL,
+//   `language` varchar(255) DEFAULT NULL
+// );

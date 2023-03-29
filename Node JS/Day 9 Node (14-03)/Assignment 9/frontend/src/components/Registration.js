@@ -35,9 +35,7 @@ const Registration = () => {
       alert("confirm Password is required");
     } else if (address == "") {
       alert("address is required");
-    }
-
-    if (
+    } else if(
       password == confirmpassword &&
       firstname != "" &&
       lastname != "" &&

@@ -7,18 +7,10 @@ const dbConn = mysql.createConnection({
   database: "traineedb",
 });
 
-// dbCon.connect((err) => {
-//   if (err) throw err;
-//   console.log("Database Connected!");
-// });
-
-// app.listen(8000, () => {
-//   console.log(`Server is running on port 8000.`);
-// }); 
-
 export default dbConn;
 
 // Table used
+
 // CREATE TABLE  `traineedb`.`prince_hr` (
 //   `recid` int(11) NOT NULL AUTO_INCREMENT,
 //   `emp_id` int(11) NOT NULL,

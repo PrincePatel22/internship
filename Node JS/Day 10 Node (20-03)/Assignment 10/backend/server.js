@@ -11,7 +11,6 @@ const dbConn = mysql.createConnection({
   user: "trainee",
   password: "trainee@123",
   database: "traineedb",
-  timezone: "utc",
 });
 
 dbConn.connect((err) => {
@@ -63,7 +62,7 @@ const deleteData = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       const getMyChild = await getChildData(data.id);
-    //   console.log("getMyChild", getMyChild);
+      //   console.log("getMyChild", getMyChild);
       getMyChild.map(async (item) => {
         await deleteData(item);
       });
@@ -118,5 +117,14 @@ app.post("/addcategory", (req, res) => {
 });
 
 app.listen(8000, () => {
-  console.log(`Server is running on port 9001.`);
+  console.log(`Server is running on port 8000.`);
 });
+
+// Table used
+
+// CREATE TABLE  `traineedb`.`prince_category` (
+//   `id` int(11) NOT NULL AUTO_INCREMENT,
+//   `name` varchar(100) DEFAULT NULL,
+//   `parent` int(11) DEFAULT NULL,
+//   PRIMARY KEY (`id`)
+// );

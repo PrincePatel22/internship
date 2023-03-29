@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const Addlocation = () => {
   const navigation = useNavigate();
-  const [buildingid, setBuildingid] = useState();
-  const [address, setAddress] = useState();
-  const [zipcode, setZipcode] = useState();
-  const [manager, setManager] = useState();
+  const [buildingid, setBuildingid] = useState("");
+  const [address, setAddress] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [manager, setManager] = useState("");
 
   const addLocation = async (event) => {
     event.preventDefault();
@@ -19,19 +19,19 @@ const Addlocation = () => {
       alert("zipcode is required");
     } else if (manager == "") {
       alert("Manager is required");
-    } 
-
-    try {
-      let response = await axios.post("http://localhost:8000/addlocation", {
-        buildingid: buildingid,
-        address: address,
-        zipcode: zipcode,
-        manager: manager,
-      });
-      console.log(response.data);
-      navigation("/Locations");
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        let response = await axios.post("http://localhost:8000/addlocation", {
+          buildingid: buildingid,
+          address: address,
+          zipcode: zipcode,
+          manager: manager,
+        });
+        console.log(response.data);
+        navigation("/Locations");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

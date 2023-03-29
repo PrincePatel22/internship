@@ -76,3 +76,16 @@ app.get("/profile", (req, res) => {
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
 });
+
+// Table used 
+
+// CREATE TABLE  `traineedb`.`registration_prince` (
+//   `recid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+//   `firstname` varchar(100) DEFAULT NULL,
+//   `lastname` varchar(100) DEFAULT NULL,
+//   `email` varchar(100) DEFAULT NULL,
+//   `password` varchar(255) DEFAULT NULL,
+//   `accesstoken` varchar(255) DEFAULT NULL,
+//   `dateadded` date DEFAULT NULL,
+//   PRIMARY KEY (`recid`)
+// );

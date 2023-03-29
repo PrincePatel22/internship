@@ -41,13 +41,20 @@ app.get("/getdata", (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  // dbConn.query(query, (error, result) => {
-  //   if (error) throw error;
-  //   console.log(result);
-  //  res.json(result);
-  // });
 });
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
 });
+
+//Table used
+
+// CREATE TABLE  `traineedb`.`bug_prince` (
+//   `id` int(11) NOT NULL AUTO_INCREMENT,
+//   `title` varchar(100) NOT NULL,
+//   `description` varchar(100) NOT NULL,
+//   `date` date DEFAULT NULL,
+//   `time` time DEFAULT NULL,
+//   `assignee` varchar(45) NOT NULL,
+//   PRIMARY KEY (`id`)
+// );

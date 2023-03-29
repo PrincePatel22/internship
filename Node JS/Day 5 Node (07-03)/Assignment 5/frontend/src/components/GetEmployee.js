@@ -6,16 +6,18 @@ import { Button, Table } from "react-bootstrap";
 const GetEmployee = () => {
   const [employees, setEmployees] = useState([]);
 
-  const fetchEmployee = (event) => {
+  const fetchEmployee = async (event) => {
     event.preventDefault();
-    axios
-      .get("http://5c055de56b84ee00137d25a0.mockapi.io/api/v1/employees")
-      .then((res) => {
-        const employees = res.data;
-        console.log(employees);
-        setEmployees(employees);
-      });
+    try {
+      let res = await axios.get(
+        "http://5c055de56b84ee00137d25a0.mockapi.io/api/v1/employees"
+      );
+      setEmployees(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div>
       <Button
@@ -36,7 +38,7 @@ const GetEmployee = () => {
         <tbody>
           {employees.length != 0 ? (
             employees.map((data) => (
-              <tr>
+              <tr key={data.id}>
                 <td>{data.id}</td>
                 <td>{data.name}</td>
                 <td>{data.createdAt}</td>

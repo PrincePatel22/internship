@@ -14,24 +14,24 @@ function Login() {
       alert("email is required");
     } else if (password == "") {
       alert("Password is required");
-    }
-
-    try {
-      let response = await axios.post("http://localhost:8000/login", {
-        email: email,
-        password: password,
-      });
-      console.log(response.data);
-      if (response.data == "Please enter valid credentials") {
-        alert("Please enter valid credentials");
-        navigation("/Login");
-      } else {
-        let token = response.data;
-        localStorage.setItem("token", token);
-        navigation("/Profile");
+    } else {
+      try {
+        let response = await axios.post("http://localhost:8000/login", {
+          email: email,
+          password: password,
+        });
+        console.log(response.data);
+        if (response.data == "Please enter valid credentials") {
+          alert("Please enter valid credentials");
+          navigation("/Login");
+        } else {
+          let token = response.data;
+          localStorage.setItem("token", token);
+          navigation("/Profile");
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 

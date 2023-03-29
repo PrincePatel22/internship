@@ -94,7 +94,11 @@ const Home = () => {
       setFilterUser(users);
     } else {
       for (let i = 0; i < filterUser.length; i++) {
-        if (filterUser[i].name.toLowerCase().includes(search.toLowerCase())) {
+        if (
+          filterUser[i].name.toLowerCase().includes(search.toLowerCase()) ||
+          filterUser[i].code.toLowerCase().includes(search.toLowerCase()) ||
+          filterUser[i].email.toLowerCase().includes(search.toLowerCase())
+        ) {
           temp.push(filterUser[i]);
         }
       }
@@ -379,7 +383,7 @@ const Home = () => {
         </thead>
 
         {filterUser &&
-          filterUser.map((items) => {
+          filterUser.slice(offset, offset + PER_PAGE).map((items) => {
             return (
               <tbody className="text-center">
                 <td>{items.code}</td>

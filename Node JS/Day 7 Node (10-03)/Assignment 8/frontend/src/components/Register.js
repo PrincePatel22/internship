@@ -22,9 +22,7 @@ function Register() {
       alert("password is required");
     } else if (confirmpassword == "") {
       alert("confirm Password is required");
-    }
-
-    if (
+    }else if(
       password == confirmpassword &&
       firstname != "" &&
       lastname != "" &&

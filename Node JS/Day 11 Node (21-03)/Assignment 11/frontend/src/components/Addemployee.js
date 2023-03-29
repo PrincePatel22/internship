@@ -1,19 +1,19 @@
-import { react, useState, useEffect } from "react";
+import { react, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Editemployee = (props) => {
+const Addemployee = () => {
   const navigation = useNavigate();
-  const [firstname, setFirstname] = useState(props.updateUser.firstname);
-  const [lastname, setLastname] = useState(props.updateUser.lastname);
-  const [email, setEmail] = useState(props.updateUser.email);
-  const [phone, setPhone] = useState(props.updateUser.phone);
-  const [gender, setGender] = useState(props.updateUser.gender);
-  const [location, setLocation] = useState([]);
-  const [loc, setLoc] = useState(props.updateUser.location);
-  const [address, setAddress] = useState(props.updateUser.address);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState("");
+  const [location, setLocation] = useState("");
+  const [loc, setLoc] = useState("");
+  const [address, setAddress] = useState("");
 
-  const updateEmployee = async (event) => {
+  const addEmployee = async (event) => {
     event.preventDefault();
     if (firstname == "") {
       alert("first name is required");
@@ -27,29 +27,37 @@ const Editemployee = (props) => {
       alert("gender is required");
     } else if (address == "") {
       alert("address is required");
-    }
-
-    try {
-      let response = await axios.post("http://localhost:8000/updateemployee", {
-        id: props.updateUser.emp_id,
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        phone: phone,
-        gender: gender,
-        location: loc,
-        address: address,
-      });
-      console.log(response.data);
-      navigation("/");
-    } catch (error) {
-      console.log(error);
+    } else if (
+      firstname != "" &&
+      lastname != "" &&
+      email != "" &&
+      phone != "" &&
+      gender != "" &&
+      address != ""
+    ) {
+      try {
+        let response = await axios.post("http://localhost:8000/addemployee", {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          phone: phone,
+          gender: gender,
+          location: loc,
+          address: address,
+        });
+        console.log(response.data);
+        navigation("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
+
   const getaddress = async () => {
     try {
       const response = await axios.get("http://localhost:8000/getaddress");
       setLocation(response.data);
+      setLoc(response.data[0].address);
     } catch (error) {
       console.log(error);
     }
@@ -58,10 +66,11 @@ const Editemployee = (props) => {
   useEffect(() => {
     getaddress();
   }, []);
+
   return (
     <div>
       <form className="form-right">
-        <h2 className="text-uppercase">Edit Employee</h2>
+        <h2 className="text-uppercase">Add Employee</h2>
         <div className="col-sm-6 mb-3">
           <label>First Name </label>
           <input
@@ -69,7 +78,6 @@ const Editemployee = (props) => {
             name="firstname"
             id="firstname"
             className="input-field"
-            defaultValue={props.updateUser && props.updateUser.firstname}
             onChange={(e) => {
               setFirstname(e.target.value);
             }}
@@ -82,7 +90,6 @@ const Editemployee = (props) => {
             name="lastname"
             id="lastname"
             className="input-field"
-            defaultValue={props.updateUser && props.updateUser.lastname}
             onChange={(e) => {
               setLastname(e.target.value);
             }}
@@ -94,7 +101,6 @@ const Editemployee = (props) => {
             type="email"
             className="input-field"
             name="email"
-            defaultValue={props.updateUser && props.updateUser.email}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -106,7 +112,6 @@ const Editemployee = (props) => {
             type="tel"
             className="input-field"
             name="phone"
-            defaultValue={props.updateUser && props.updateUser.phone}
             onChange={(e) => {
               setPhone(e.target.value);
             }}
@@ -122,15 +127,9 @@ const Editemployee = (props) => {
                 id="male"
                 className="input-field"
                 value="male"
-                defaultChecked={
-                  props.updateUser && props.updateUser.gender == "male"
-                    ? true
-                    : false
-                }
                 onChange={(e) => {
                   setGender(e.target.value);
                 }}
-                // defaultValue={props.updateUser && props.updateUser.gender}
               />
               <label>Male</label>
               <input
@@ -139,15 +138,9 @@ const Editemployee = (props) => {
                 id="female"
                 className="input-field"
                 value="female"
-                defaultChecked={
-                  props.updateUser && props.updateUser.gender == "female"
-                    ? true
-                    : false
-                }
                 onChange={(e) => {
                   setGender(e.target.value);
                 }}
-                // defaultValue={props.updateUser && props.updateUser.gender}
               />
               <label>Female</label>
             </div>
@@ -158,7 +151,6 @@ const Editemployee = (props) => {
           <select
             className="form-select"
             name="location"
-            defaultValue={props.updateUser && props.updateUser.work_location}
             onChange={(e) => {
               setLoc(e.target.value);
             }}
@@ -175,7 +167,6 @@ const Editemployee = (props) => {
             type="text"
             className="input-field"
             name="address"
-            defaultValue={props.updateUser && props.updateUser.address}
             onChange={(e) => {
               setAddress(e.target.value);
             }}
@@ -185,9 +176,10 @@ const Editemployee = (props) => {
         <div className="form-field">
           <input
             type="submit"
-            value="Update"
-            name="update"
-            onClick={updateEmployee}
+            value="Submit"
+            className="register"
+            name="Submit"
+            onClick={addEmployee}
           />
         </div>
       </form>
@@ -195,4 +187,4 @@ const Editemployee = (props) => {
   );
 };
 
-export default Editemployee;
+export default Addemployee;

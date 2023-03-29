@@ -28,6 +28,7 @@ const Profile = (props) => {
       navigation("/Login");
     }
     handleclick();
+    localStorage.setItem("ID",props.recid)
   }, []);
 
   const handleUpdate = () => {

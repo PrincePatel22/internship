@@ -37,7 +37,7 @@ const Profile = () => {
       {user && (
         <table
           className="table table-striped"
-          style={{ margin: "10px 400px 20px 400px", width: "fit-content" }}
+          style={{ margin: "10px 400px 20px 400px", width: "fit-content"}}
         >
           <tbody>
             <tr>
