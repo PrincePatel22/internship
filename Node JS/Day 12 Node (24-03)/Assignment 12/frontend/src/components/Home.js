@@ -75,6 +75,7 @@ const Home = () => {
       let res = await axios.post("http://localhost:8000/exportusers", {
         users: users,
       });
+      alert("Users exported Sucessfully");
     } catch (error) {
       console.log(error);
     }
@@ -83,6 +84,7 @@ const Home = () => {
   const handleImport = async () => {
     try {
       let res = await axios.get("http://localhost:8000/importusers");
+      alert("Users imported Sucessfully");
     } catch (error) {
       console.log(error);
     }
@@ -132,6 +134,9 @@ const Home = () => {
   };
 
   const handleReset = () => {
+    document.getElementById("search").value = "";
+    document.getElementById("female").checked = false;
+    document.getElementById("male").checked = false;
     setFilterUser(users);
   };
 

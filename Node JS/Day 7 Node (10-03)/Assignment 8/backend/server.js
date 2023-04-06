@@ -28,7 +28,7 @@ app.post("/register", (req, res) => {
   let password = req.body.password;
   let query = `INSERT INTO registration_prince (firstname, lastname, email, password, dateadded) VALUES ("${firstname}","${lastname}","${email}","${password}",CURDATE())`;
   try {
-    dbConn.query(query, (err, results) => {
+    dbConn.query(query, (err, result) => {
       if (err) throw err;
       res.send("Data Added successfully.");
     });

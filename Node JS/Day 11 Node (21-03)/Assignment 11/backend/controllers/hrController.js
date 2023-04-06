@@ -3,7 +3,7 @@ import dbConn from "../Models/models.js";
 export const getemployeeid = async (req, res) => {
   try {
     dbConn.query(
-      `SELECT emp_id FROM prince_emp WHERE delstatus=1`,
+      `SELECT emp_id FROM prince_emp WHERE delstatus="1"`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -18,7 +18,7 @@ export const addhr = async (req, res) => {
   console.log(req.body);
   try {
     dbConn.query(
-      `INSERT INTO prince_hr (emp_id, payroll, security_no, salary) VALUES ("${req.body.emp_id}","${req.body.payroll}","${req.body.securityno}","${req.body.salary}")`,
+      `INSERT INTO prince_hr (emp_id, payroll, security_no, salary,delstatus) VALUES ("${req.body.emp_id}","${req.body.payroll}","${req.body.securityno}","${req.body.salary}","1")`,
       (err, result) => {
         if (err) throw err;
         res.send("Data Added successfully.");
@@ -30,10 +30,13 @@ export const addhr = async (req, res) => {
 };
 export const gethr = async (req, res) => {
   try {
-    dbConn.query(`SELECT * FROM prince_hr `, (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    });
+    dbConn.query(
+      `SELECT * FROM prince_hr where delstatus="1"`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -41,7 +44,7 @@ export const gethr = async (req, res) => {
 export const deletehr = async (req, res) => {
   try {
     dbConn.query(
-      `DELETE FROM prince_hr WHERE recid="${req.body.id}"`,
+      `UPDATE prince_hr SET delstatus="0" WHERE recid="${req.body.id}"`,
       (err, result) => {
         if (err) throw err;
         res.send(result);

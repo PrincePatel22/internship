@@ -9,7 +9,7 @@ export const addlocation = async (req, res) => {
 
   try {
     dbConn.query(
-      `INSERT INTO prince_locations (building_id, address, zipcode, manager) VALUES ("${buildingid}","${address}","${zipcode}","${manager}")`,
+      `INSERT INTO prince_locations (building_id, address, zipcode, manager,delstatus) VALUES ("${buildingid}","${address}","${zipcode}","${manager}","1")`,
       (err, result) => {
         if (err) throw err;
         res.send("Data Added successfully.");
@@ -22,7 +22,7 @@ export const addlocation = async (req, res) => {
 
 export const getlocation = async (req, res) => {
   try {
-    dbConn.query(`SELECT * FROM prince_locations`, (err, result) => {
+    dbConn.query(`SELECT * FROM prince_locations where delstatus="1"`, (err, result) => {
       if (err) throw err;
       res.send(result);
     });
@@ -34,7 +34,7 @@ export const getlocation = async (req, res) => {
 export const deletelocation = async (req, res) => {
   try {
     dbConn.query(
-      `DELETE FROM prince_locations WHERE recid="${req.body.id}"`,
+      `UPDATE prince_locations SET delstatus="0" WHERE recid="${req.body.id}"`,
       (err, result) => {
         if (err) throw err;
         res.send(result);

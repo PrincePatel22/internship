@@ -7,12 +7,22 @@ const Adduser = () => {
 
   const handleAdd = async (event) => {
     event.preventDefault();
+
+    const users = await axios.get("http://localhost:8000/getusers");
+    console.log(users.data);
+
     const data = new FormData(event.target);
     if (
       !event.target.code.value.match(/^[0-9A-Za-z]+$/) ||
       event.target.code.value == ""
     ) {
       return alert("Please enter code");
+    } else if (!event.target.code.value.match(/[A-Za-z]{3}[0-9]{3}/)) {
+      return alert("Please enter 6 digits code only");
+    } else if (
+      users.data.find((item) => item.code == event.target.code.value)
+    ) {
+      return alert("code is already exits.Please enter another code");
     } else if (
       !event.target.firstname.value.match(/^[A-Za-z]+$/) ||
       event.target.firstname.value == ""

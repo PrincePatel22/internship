@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [firstname, setFirstName] = useState("");
@@ -7,9 +8,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
-  const [data, setData] = useState([]);
+  const navigation = useNavigate();
 
- const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     if (firstname == "") {
@@ -22,7 +23,7 @@ function Register() {
       alert("password is required");
     } else if (confirmpassword == "") {
       alert("confirm Password is required");
-    }else if(
+    } else if (
       password == confirmpassword &&
       firstname != "" &&
       lastname != "" &&
@@ -36,12 +37,12 @@ function Register() {
         email: email,
         password: password,
       });
-      console.log(response.data);
-      setData(response.data);
+      alert("User registered successfully")
+      navigation("/");
     } else {
       alert("password not matched");
     }
-  }
+  };
 
   return (
     <div>
@@ -122,13 +123,6 @@ function Register() {
           <br></br>
           <input type="submit" className="btn btn-primary" value="Submit" />
         </center>
-        {data && data.length != 0 ? (
-          <div>
-            <p>Data Added successfully.</p>
-          </div>
-        ) : (
-          <></>
-        )}
       </form>
     </div>
   );

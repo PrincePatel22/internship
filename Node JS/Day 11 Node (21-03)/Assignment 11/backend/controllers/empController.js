@@ -76,7 +76,7 @@ export const updateemployee = async (req, res) => {
 export const getaddress = async (req, res) => {
   try {
     dbConn.query(
-      `SELECT address FROM prince_locations`,
+      `SELECT address FROM prince_locations where delstatus="1"`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
