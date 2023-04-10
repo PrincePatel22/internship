@@ -24,12 +24,16 @@ export const login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   dbConn.query(
-    `SELECT email FROM sleep_user WHERE email = "${email}" AND password = "${password}"`,
+    `SELECT email,password FROM sleep_user WHERE email = "${email}" AND password = "${password}"`,
     (err, result) => {
-      if (result.length > 0 && result[0].email === email) {
+      if (
+        result.length > 0 &&
+        result[0].email === email &&
+        result[0].password === password
+      ) {
         const token = jwt.sign({ email: email }, secretKey);
         dbConn.query(
-          `UPDATE sleep_user SET accesstoken="${token}" WHERE password = "${password}"`
+          `UPDATE sleep_user SET accesstoken="${token}" WHERE password = "${password}" AND email = "${email}"`
         );
         res.send(token);
         // console.log(result);

@@ -19,8 +19,9 @@ app.post("/createFolder", (req, res) => {
 
 app.post("/createFile", (req, res) => {
   let fileName = req.body.name;
+  let extension = req.body.extension;
   try {
-    fs.appendFile("./" + fileName, "", (error) => {
+    fs.open("./" + fileName + "." + extension, "a", (error) => {
       if (error) throw error;
       res.send(200, "file is created sucessfully");
     });

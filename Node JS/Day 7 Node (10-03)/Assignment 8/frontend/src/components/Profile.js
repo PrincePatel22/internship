@@ -27,12 +27,11 @@ const Profile = () => {
     }
     handleclick();
   }, []);
-  
+
   return (
     <>
       <center>
         <br />
-        {/* <button onClick={handleclick}>Get your Profile</button> */}
         <br /> <br />
         <div>First name : {fname}</div>
         <div>Last name : {lname}</div>

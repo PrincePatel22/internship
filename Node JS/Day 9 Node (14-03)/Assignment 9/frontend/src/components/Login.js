@@ -12,6 +12,8 @@ const Login = () => {
 
     if (email == "") {
       alert("email is required");
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      alert("Enter valid email");
     } else if (password == "") {
       alert("Password is required");
     } else {

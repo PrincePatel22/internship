@@ -17,13 +17,31 @@ function App() {
   }, [movies]);
 
   const addMovie = async () => {
-    const baseUrl = "http://localhost:8000/add";
-    const response = await axios.post(baseUrl, {
-      name: name,
-      genre: genre,
-      rating: rating,
-      language: language,
-    });
+    if (name === "") {
+      alert("Enter movie name");
+    } else if (!/^[A-Za-z0-9]*$/.test(name)) {
+      alert("Name only contain numeric and alphabetic value");
+    } else if (genre === "") {
+      alert("Enter movie genre");
+    } else if (!/^[A-Za-z]*$/.test(genre)) {
+      alert("Genre only contain alphabetic value");
+    } else if (rating === "") {
+      alert("Enter movie rating.");
+    } else if (isNaN(rating)) {
+      alert("Enter numeric value in rating");
+    } else if (language === "") {
+      alert("Enter movie language");
+    } else if (!/^[A-Za-z]*$/.test(language)) {
+      alert("language only contain alphabetic value");
+    } else {
+      const baseUrl = "http://localhost:8000/add";
+      const response = await axios.post(baseUrl, {
+        name: name,
+        genre: genre,
+        rating: rating,
+        language: language,
+      });
+    }
   };
 
   const allMovies = async () => {

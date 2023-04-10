@@ -86,6 +86,7 @@ const Addlocation = () => {
         <input
           type="submit"
           value="Submit"
+          className="btn btn-primary"
           name="Submit"
           onClick={addLocation}
         />

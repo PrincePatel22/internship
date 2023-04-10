@@ -20,6 +20,15 @@ const Editlocation = (props) => {
 
   const editLocation = async (event) => {
     event.preventDefault();
+    if (buildingid == "") {
+      alert("Building ID is required");
+    } else if (address == "") {
+      alert("Address is required");
+    } else if (zipcode == "") {
+      alert("zipcode is required");
+    } else if (manager == "") {
+      alert("Manager is required");
+    } else {
     try {
       let response = await axios.post("http://localhost:8000/updatelocation", {
         recid: props.updateLocation.recid,
@@ -31,7 +40,7 @@ const Editlocation = (props) => {
       navigation("/Locations");
     } catch (error) {
       console.log(error);
-    }
+    }}
   };
 
   return (
@@ -88,7 +97,12 @@ const Editlocation = (props) => {
         />
       </div>
       <div className="form-field">
-        <input type="submit" value="update" name="Submit" />
+        <input
+          type="submit"
+          value="update"
+          name="Submit"
+          className="btn btn-primary"
+        />
       </div>
     </form>
   );

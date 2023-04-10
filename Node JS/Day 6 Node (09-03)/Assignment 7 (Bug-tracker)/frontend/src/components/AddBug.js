@@ -20,14 +20,14 @@ function Addbug() {
       return alert("Please enter description");
     } else if (assignee == "") {
       return alert("Please enter assignee");
+    } else {
+      const baseUrl = "http://localhost:8000/addbug";
+      const responce = axios.post(baseUrl, {
+        title: title,
+        description: description,
+        assignee: assignee,
+      });
     }
-
-    const baseUrl = "http://localhost:8000/addbug";
-    const responce = axios.post(baseUrl, {
-      title: title,
-      description: description,
-      assignee: assignee,
-    });
   };
 
   const getdata = async () => {

@@ -45,7 +45,6 @@ const Locations = (props) => {
       <table className="table" style={{ margin: "20px 20px 10px 10px" }}>
         <thead>
           <tr>
-            <th scope="col">ID</th>
             <th scope="col">Building ID</th>
             <th scope="col">Address</th>
             <th scope="col">Zip code</th>
@@ -60,7 +59,7 @@ const Locations = (props) => {
             locations.map((items) => {
               return (
                 <tr>
-                  <td>{items.recid}</td>
+                  
                   <td>{items.building_id}</td>
                   <td>{items.address}</td>
                   <td>{items.zipcode}</td>

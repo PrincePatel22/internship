@@ -17,24 +17,25 @@ const Addemployee = () => {
     event.preventDefault();
     if (firstname == "") {
       alert("first name is required");
+    } else if (!/^[A-Za-z]*$/.test(firstname)) {
+      alert("Enter valid first name");
     } else if (lastname == "") {
       alert("last name is required");
+    } else if (!/^[A-Za-z]*$/.test(lastname)) {
+      alert("Enter valid last name");
     } else if (email == "") {
       alert("email is required");
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      alert("Enter valid email");
     } else if (phone == "") {
       alert("phone number is required");
+    } else if (phone.length < 10) {
+      alert("Enter valid Phone number");
     } else if (gender == "") {
       alert("gender is required");
     } else if (address == "") {
       alert("address is required");
-    } else if (
-      firstname != "" &&
-      lastname != "" &&
-      email != "" &&
-      phone != "" &&
-      gender != "" &&
-      address != ""
-    ) {
+    } else {
       try {
         let response = await axios.post("http://localhost:8000/addemployee", {
           firstname: firstname,
@@ -177,7 +178,7 @@ const Addemployee = () => {
           <input
             type="submit"
             value="Submit"
-            className="register"
+            className="register btn btn-primary"
             name="Submit"
             onClick={addEmployee}
           />

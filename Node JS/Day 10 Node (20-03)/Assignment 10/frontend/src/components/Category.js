@@ -19,16 +19,24 @@ const Category = () => {
     }
   };
 
-  const addCategory = async () => {
-    try {
-      let res = await axios.post("http://localhost:8000/addcategory", {
-        category: category,
-        name: name,
-        type: type,
-      });
-      navigation("/");
-    } catch (error) {
-      console.log(error);
+  const addCategory = async (event) => {
+    event.preventDefault();
+
+    if (name === "") {
+      alert("Enter category name");
+    } else if (!category) {
+      alert("Please select category type");
+    } else {
+      try {
+        let res = await axios.post("http://localhost:8000/addcategory", {
+          category: category,
+          name: name,
+          type: type,
+        });
+        navigation("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {

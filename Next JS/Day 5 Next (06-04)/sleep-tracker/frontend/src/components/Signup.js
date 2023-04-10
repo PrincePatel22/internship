@@ -117,7 +117,6 @@ const Signup = () => {
               setConfirmPassword(e.target.value);
             }}
           />
-
           <input type="submit" className="btn btn-primary" value="Submit" />
         </center>
       </form>

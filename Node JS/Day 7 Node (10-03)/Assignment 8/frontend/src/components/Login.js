@@ -12,8 +12,16 @@ function Login() {
 
     if (email == "") {
       alert("email is required");
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      alert("Enter valid email");
     } else if (password == "") {
       alert("Password is required");
+    } else if (password.length < 6) {
+      alert("Minimum 6 digits password requied");
+    } else if (!/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(password)) {
+      alert(
+        "password should contain atleast one number and one special character"
+      );
     } else {
       try {
         let response = await axios.post("http://localhost:8000/login", {
@@ -27,7 +35,7 @@ function Login() {
         } else {
           let token = response.data;
           localStorage.setItem("token", token);
-          navigation("/Profile");
+          // navigation("/Profile");
         }
       } catch (error) {
         console.log(error);

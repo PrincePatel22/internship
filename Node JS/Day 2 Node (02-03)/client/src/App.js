@@ -3,29 +3,54 @@ import axios from "axios";
 
 function App() {
   const primeNumber = async (e) => {
-     e.preventDefault();
     let input = document.getElementById("input").value;
-    let localHost = "http://localhost:8000/primeNumber";
-    let display = document.getElementById("display");
-    try {
-      const response = await axios.post(localHost, { input: +input });
-      display.innerHTML = response.data + ",";
-    } catch (error) {
-      console.log(error);
+    e.preventDefault();
+    if (input === "") {
+      alert("Enter Any value");
+    } else if (input.match(/\ /)) {
+      alert("Enter Any value");
+    } else if (isNaN(input)) {
+      alert("Enter only numeric value");
+    } else {
+      let localHost = "http://localhost:8000/primeNumber";
+      let display = document.getElementById("display");
+      try {
+        const response = await axios.post(localHost, { input: +input });
+        display.innerHTML = response.data + ",";
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const getPower = async (e) => {
-    e.preventDefault();
-    let localHost = "http://localhost:8000/findPower";
     let first = document.getElementById("first").value;
     let second = document.getElementById("second").value;
-    let powerDis = document.getElementById("power-display");
-    try {
-      const response = await axios.post(localHost, { first: +first, second: +second });
-      powerDis.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    e.preventDefault();
+    if (first === "") {
+      alert("Enter first value");
+    } else if (first.match(/\ /)) {
+      alert("Enter value in first text box");
+    } else if (isNaN(first)) {
+      alert("Enter numeric value in first text box");
+    } else if (second === "") {
+      alert("Enter second value");
+    } else if (second.match(/\ /)) {
+      alert("Enter value in second text box");
+    } else if (isNaN(second)) {
+      alert("Enter numeric value in second text box");
+    } else {
+      let localHost = "http://localhost:8000/findPower";
+      let powerDis = document.getElementById("power-display");
+      try {
+        const response = await axios.post(localHost, {
+          first: +first,
+          second: +second,
+        });
+        powerDis.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

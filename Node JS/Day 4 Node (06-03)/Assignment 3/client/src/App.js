@@ -1,102 +1,176 @@
 import "./App.css";
 import axios from "axios";
+import { useState } from "react";
 
 function App() {
+  const [extension, setExtension] = useState("");
+
   const createFolder = async () => {
     let name = document.getElementById("create-folder").value;
-    let baseurl = "http://localhost:8000/createFolder";
-    let display = document.getElementById("display");
-    try {
-      const response = await axios.post(baseurl, { name: name });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (name === "") {
+      alert("Please enter folder Name");
+    } else if (
+      !/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\!\@\#\$\%\&\\:<>/$"]*[^\.\|\*\?\!\@\#\$\%\&\\:<>/$"]+$/.test(
+        name
+      )
+    ) {
+      alert("Enter valid folder name.special characters are not allowed.");
+    } else {
+      let baseurl = "http://localhost:8000/createFolder";
+      let display = document.getElementById("display");
+      try {
+        const response = await axios.post(baseurl, { name: name });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const createFile = async () => {
     let name = document.getElementById("create-file").value;
-    let baseurl = "http://localhost:8000/createFile";
-    let display = document.getElementById("display1");
-    try {
-      const response = await axios.post(baseurl, { name: name });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (name === "") {
+      alert("Please enter file Name");
+    } else if (
+      !/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\!\@\#\$\%\&\\:<>/$"]*[^\.\|\*\?\!\@\#\$\%\&\\:<>/$"]+$/.test(
+        name
+      )
+    ) {
+      alert("Enter valid file name. special characters are not allowed.");
+    } else {
+      let baseurl = "http://localhost:8000/createFile";
+      let display = document.getElementById("display1");
+      try {
+        const response = await axios.post(baseurl, {
+          name: name,
+          extension: extension,
+        });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const writeData = async () => {
     let filName = document.getElementById("filName").value;
     let content = document.getElementById("content").value;
-    let baseurl = "http://localhost:8000/writeData";
-    let display = document.getElementById("display2");
-    try {
-      const response = await axios.post(baseurl, {
-        filName: filName,
-        content: content,
-      });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (filName === "") {
+      alert("Please enter file Name");
+    } else if (content === "") {
+      alert("Please enter data");
+    } else if (
+      !/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\!\@\#\$\%\&\\:<>/$"]*[^\.\|\*\?\!\@\#\$\%\&\\:<>/$"]+$/.test(
+        filName
+      )
+    ) {
+      alert("Enter valid file name. special characters are not allowed.");
+    } else {
+      let baseurl = "http://localhost:8000/writeData";
+      let display = document.getElementById("display2");
+      try {
+        const response = await axios.post(baseurl, {
+          filName: filName,
+          content: content,
+        });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const appendData = async () => {
     let filName = document.getElementById("append-file").value;
     let content = document.getElementById("append-content").value;
-    let baseurl = "http://localhost:8000/appendData";
-    let display = document.getElementById("display3");
-    try {
-      const response = await axios.post(baseurl, {
-        filName: filName,
-        content: content,
-      });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (filName === "") {
+      alert("Please enter file Name");
+    } else if (content === "") {
+      alert("Please enter data");
+    } else if (
+      !/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\!\@\#\$\%\&\\:<>/$"]*[^\.\|\*\?\!\@\#\$\%\&\\:<>/$"]+$/.test(
+        filName
+      )
+    ) {
+      alert("Enter valid file name. special characters are not allowed.");
+    } else {
+      let baseurl = "http://localhost:8000/appendData";
+      let display = document.getElementById("display3");
+      try {
+        const response = await axios.post(baseurl, {
+          filName: filName,
+          content: content,
+        });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const readData = async () => {
     let filName = document.getElementById("read-file").value;
-    let baseurl = "http://localhost:8000/readData";
-    let display = document.getElementById("display4");
-    try {
-      const response = await axios.post(baseurl, {
-        filName: filName,
-      });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (filName === "") {
+      alert("Please enter file Name");
+    } else if (
+      !/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\!\@\#\$\%\&\\:<>/$"]*[^\.\|\*\?\!\@\#\$\%\&\\:<>/$"]+$/.test(
+        filName
+      )
+    ) {
+      alert("File don't contain special characters.");
+    } else {
+      let baseurl = "http://localhost:8000/readData";
+      let display = document.getElementById("display4");
+      try {
+        const response = await axios.post(baseurl, {
+          filName: filName,
+        });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const displayFile = async () => {
     let filName = document.getElementById("display-file").value;
-    let baseurl = "http://localhost:8000/displayFile";
-    let display = document.getElementById("display6");
-    try {
-      const response = await axios.post(baseurl, {
-        filName: filName,
-      });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (filName === "") {
+      alert("Please enter file Name");
+    } else if (
+      !/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|\*\?\!\@\#\$\%\&\\:<>/$"]*[^\.\|\*\?\!\@\#\$\%\&\\:<>/$"]+$/.test(
+        filName
+      )
+    ) {
+      alert("File don't contain special characters.");
+    } else {
+      let baseurl = "http://localhost:8000/displayFile";
+      let display = document.getElementById("display6");
+      try {
+        const response = await axios.post(baseurl, {
+          filName: filName,
+        });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const deleteFile = async () => {
     let filName = document.getElementById("delete-file").value;
-    let baseurl = "http://localhost:8000/deleteFile";
-    let display = document.getElementById("display5");
-    try {
-      const response = await axios.post(baseurl, {
-        filName: filName,
-      });
-      display.innerHTML = response.data;
-    } catch (error) {
-      console.log(error);
+    if (filName === "") {
+      alert("Please enter file Name");
+    } else {
+      let baseurl = "http://localhost:8000/deleteFile";
+      let display = document.getElementById("display5");
+      try {
+        const response = await axios.post(baseurl, {
+          filName: filName,
+        });
+        display.innerHTML = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -124,6 +198,16 @@ function App() {
           placeholder="Create File"
           id="create-file"
         ></input>
+        &nbsp; extension: &nbsp;
+        <select onChange={(e) => setExtension(e.target.value)}>
+          <option value="txt">text</option>
+          <option value="html">html</option>
+          <option value="csv">csv</option>
+          <option value="js">js</option>
+          <option value="css">css</option>
+          <option value="jsx">jsx</option>
+          <option value="sql">sql</option>
+        </select>
         &nbsp;
         <button type="submit" onClick={createFile}>
           Create File

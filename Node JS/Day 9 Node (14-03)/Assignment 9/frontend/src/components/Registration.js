@@ -19,29 +19,37 @@ const Registration = () => {
 
     if (firstname == "") {
       alert("first name is required");
+    } else if (!/^[A-Za-z]*$/.test(firstname)) {
+      alert("Enter valid first name");
     } else if (lastname == "") {
       alert("last name is required");
+    } else if (!/^[A-Za-z]*$/.test(lastname)) {
+      alert("Enter valid last name");
     } else if (email == "") {
       alert("email is required");
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      alert("Enter valid email");
     } else if (phone == "") {
       alert("phone number is required");
+    } else if (isNaN(phone) || phone.length < 10) {
+      alert("Phone Number contain numeric value and length must be 10 digits.");
     } else if (dob == "") {
       alert("Birth date is required");
     } else if (gender == "") {
       alert("gender is required");
     } else if (password == "") {
       alert("password is required");
+    } else if (password.length < 6) {
+      alert("Minimum 6 digits password requied");
+    } else if (!/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(password)) {
+      alert(
+        "password should contain atleast one number and one special character"
+      );
     } else if (confirmpassword == "") {
       alert("confirm Password is required");
     } else if (address == "") {
       alert("address is required");
-    } else if(
-      password == confirmpassword &&
-      firstname != "" &&
-      lastname != "" &&
-      email != "" &&
-      password != "" && phone != "" && dob != "" && gender != "" && address != ""
-    ) {
+    } else if (password == confirmpassword) {
       let baseUrl = "http://localhost:8000/registration";
       let response = axios.post(baseUrl, {
         firstname: firstname,

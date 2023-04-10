@@ -29,6 +29,8 @@ const Addhr = () => {
       alert("Security Number is required");
     } else if (salary == "") {
       alert("Salary is required");
+    } else if (isNaN(salary)) {
+      alert("Enter valid salary");
     } else {
       try {
         console.log(emp);
@@ -105,7 +107,7 @@ const Addhr = () => {
         <input
           type="submit"
           value="Submit"
-          className="register"
+          className="register btn btn-primary"
           name="Submit"
           onClick={addHr}
         />

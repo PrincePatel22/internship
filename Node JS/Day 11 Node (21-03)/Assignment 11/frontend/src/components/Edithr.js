@@ -25,17 +25,27 @@ const Edithr = (props) => {
   };
   const updatehr = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8000/updatehr", {
-        recid: props.updatehr.recid,
-        emp_id: props.updatehr.emp_id,
-        payroll: payroll,
-        security_no: securityno,
-        salary: salary,
-      });
-      navigation("/Hr");
-    } catch (error) {
-      console.log(error);
+    if (payroll == "") {
+      alert("Payroll is required");
+    } else if (securityno == "") {
+      alert("Security Number is required");
+    } else if (salary == "") {
+      alert("Salary is required");
+    } else if (isNaN(salary)) {
+      alert("Enter valid salary");
+    } else {
+      try {
+        const response = await axios.post("http://localhost:8000/updatehr", {
+          recid: props.updatehr.recid,
+          emp_id: props.updatehr.emp_id,
+          payroll: payroll,
+          security_no: securityno,
+          salary: salary,
+        });
+        navigation("/Hr");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -103,7 +113,7 @@ const Edithr = (props) => {
         <input
           type="submit"
           value="Submit"
-          className="register"
+          className="register btn btn-primary"
           name="Submit"
           onClick={updatehr}
         />

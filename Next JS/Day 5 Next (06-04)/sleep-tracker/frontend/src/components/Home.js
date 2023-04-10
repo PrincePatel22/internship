@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-        <h4 style={{ color: "#212529" }}>Sleep Tracker app</h4>
+        <h4 style={{ color: "#fff" }}>Sleep Tracker app</h4>
         <div style={{ marginLeft: "72%" }}>
           <button
             type="button"

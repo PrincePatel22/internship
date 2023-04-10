@@ -4,7 +4,7 @@ import dbConn from "../models/models.js";
 export const exportUsers = (req, res) => {
   const users = req.body.users;
 
-  const workbook = new exceljs.Workbook();
+  const workbook = new exceljs.Workbook("./Sheets/Users.xlsx");
   const worksheet = workbook.addWorksheet("Users");
 
   worksheet.columns = [

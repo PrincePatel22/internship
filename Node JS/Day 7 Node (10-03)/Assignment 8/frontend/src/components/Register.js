@@ -13,23 +13,29 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (firstname == "") {
+    if (firstname === "") {
       alert("first name is required");
-    } else if (lastname == "") {
+    } else if (!/^[A-Za-z]*$/.test(firstname)) {
+      alert("Enter valid first name");
+    } else if (lastname === "") {
       alert("last name is required");
-    } else if (email == "") {
+    } else if (!/^[A-Za-z]*$/.test(lastname)) {
+      alert("Enter valid last name");
+    } else if (email === "") {
       alert("email is required");
-    } else if (password == "") {
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      alert("Enter valid email");
+    } else if (password === "") {
       alert("password is required");
-    } else if (confirmpassword == "") {
+    } else if (password.length < 6) {
+      alert("Minimum 6 digits password requied");
+    } else if (!/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(password)) {
+      alert(
+        "password should contain atleast one number and one special character"
+      );
+    } else if (confirmpassword === "") {
       alert("confirm Password is required");
-    } else if (
-      password == confirmpassword &&
-      firstname != "" &&
-      lastname != "" &&
-      email != "" &&
-      password != ""
-    ) {
+    } else if (password === confirmpassword) {
       let baseUrl = "http://localhost:8000/register";
       let response = axios.post(baseUrl, {
         firstname: firstname,
@@ -37,7 +43,7 @@ function Register() {
         email: email,
         password: password,
       });
-      alert("User registered successfully")
+      alert("User registered successfully");
       navigation("/");
     } else {
       alert("password not matched");
@@ -121,7 +127,7 @@ function Register() {
           />
           <br></br>
           <br></br>
-          <input type="submit" className="btn btn-primary" value="Submit" />
+          <input type="button" className="btn btn-primary" value="Submit" />
         </center>
       </form>
     </div>

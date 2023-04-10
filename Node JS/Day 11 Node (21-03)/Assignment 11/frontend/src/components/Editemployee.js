@@ -4,37 +4,50 @@ import { useNavigate } from "react-router-dom";
 
 const Editemployee = (props) => {
   const navigation = useNavigate();
-  const [firstname, setFirstname] = useState(props.updateUser.firstname);
-  const [lastname, setLastname] = useState(props.updateUser.lastname);
-  const [email, setEmail] = useState(props.updateUser.email);
-  const [phone, setPhone] = useState(props.updateUser.phone);
-  const [gender, setGender] = useState(props.updateUser.gender);
+  const [firstname, setFirstname] = useState(
+    props.updateUser && props.updateUser.firstname
+  );
+  const [lastname, setLastname] = useState(
+    props.updateUser && props.updateUser.lastname
+  );
+  const [email, setEmail] = useState(
+    props.updateUser && props.updateUser.email
+  );
+  const [phone, setPhone] = useState(
+    props.updateUser && props.updateUser.phone
+  );
+  const [gender, setGender] = useState(
+    props.updateUser && props.updateUser.gender
+  );
   const [location, setLocation] = useState([]);
-  const [loc, setLoc] = useState(props.updateUser.location);
-  const [address, setAddress] = useState(props.updateUser.address);
+  const [loc, setLoc] = useState(props.updateUser && props.updateUser.location);
+  const [address, setAddress] = useState(
+    props.updateUser && props.updateUser.address
+  );
 
   const updateEmployee = async (event) => {
     event.preventDefault();
     if (firstname == "") {
       alert("first name is required");
+    } else if (!/^[A-Za-z]*$/.test(firstname)) {
+      alert("Enter valid first name");
     } else if (lastname == "") {
       alert("last name is required");
+    } else if (!/^[A-Za-z]*$/.test(lastname)) {
+      alert("Enter valid last name");
     } else if (email == "") {
       alert("email is required");
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      alert("Enter valid email");
     } else if (phone == "") {
       alert("phone number is required");
+    } else if (phone.length < 10) {
+      alert("Enter valid Phone number");
     } else if (gender == "") {
       alert("gender is required");
     } else if (address == "") {
       alert("address is required");
-    } else if (
-      firstname != "" &&
-      lastname != "" &&
-      email != "" &&
-      phone != "" &&
-      gender != "" &&
-      address != ""
-    ) {
+    } else {
       try {
         let response = await axios.post(
           "http://localhost:8000/updateemployee",
@@ -197,6 +210,7 @@ const Editemployee = (props) => {
             type="submit"
             value="Update"
             name="update"
+            className="btn btn-primary"
             onClick={updateEmployee}
           />
         </div>
