@@ -15,8 +15,12 @@ const Signup = () => {
 
     if (firstname == "") {
       alert("first name is required");
+    } else if (!/^[A-Za-z]*$/.test(firstname)) {
+      alert("Enter valid first name");
     } else if (lastname == "") {
       alert("last name is required");
+    } else if (!/^[A-Za-z]*$/.test(lastname)) {
+      alert("Enter valid last name");
     } else if (email == "") {
       alert("email is required");
     } else if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
@@ -25,15 +29,13 @@ const Signup = () => {
       alert("password is required");
     } else if (password.length < 6) {
       return alert("Password length must be 6 digit");
+    } else if (password.match(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+      alert(
+        "password should contain atleast one number and one special character"
+      );
     } else if (confirmpassword == "") {
       alert("confirm Password is required");
-    } else if (
-      password == confirmpassword &&
-      firstname != "" &&
-      lastname != "" &&
-      email != "" &&
-      password != ""
-    ) {
+    } else if (password == confirmpassword) {
       let response = axios.post("http://localhost:8000/signup", {
         firstname: firstname,
         lastname: lastname,

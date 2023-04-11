@@ -1,0 +1,44 @@
+-   Tables Used
+    
+    -   student  (recid, name)
+
+    -   studentdetail (recid, studentid, standard, flagsex)
+
+    -   studentpresent (recid, studentid, month, present)
+
+    -   studenthours (recid, studentid, datex, hours)
+
+- Create above mentioned tables.
+
+- Insert appropriate records in the above tables.
+
+- Write queries for the following requirements.
+    
+    -  Display following details for each student:
+        
+        -   Name
+
+        -   Standard
+
+        -   Sex
+
+   NOTE : The same above headers should be displayed in the query & apply sorting on Name.
+    
+    -   Find SUM of student hours.			Fields : Name, TotalHours
+
+    -   Find Average Present of each student.		Fields : Name, Present
+
+    -   Find Minimum present among all students.	Fields : MinPresent
+
+    -   Find Maximum present among all students.	Fields : MaxPresent
+
+    -   Display fields like Name, Date, Hours from "studenthours" table where Date should be in following format :
+        
+        -   DD/MM/YY
+
+        -   MM/DD/YY
+
+        -   YYYY-MM-DD
+
+        -   MM/DD Day   
+   

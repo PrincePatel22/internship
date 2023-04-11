@@ -64,14 +64,45 @@ app.get("/profile", (req, res) => {
     const token = req.headers["token"];
     if (!token) {
       res.send("Please register first");
-    } else {
+    } else if(token){
       jwt.verify(token, secretKey, (err, decode) => {
         if (err) throw err;
-        const query = `SELECT * from registration_prince WHERE email = "${decode.email}"`;
-        dbConn.query(query, (err, result) => {
-          res.status(200).send(result);
-          console.log(result);
-        });
+        if (decode) {
+          const query = `SELECT *,DATE_FORMAT(dateadded,"%d/%m/%Y %h:%i:%s") as dateadded from registration_prince WHERE email = "${decode.email}"`;
+          dbConn.query(query, (err, result) => {
+            res.status(200).send(result);
+            console.log(result);
+          });
+        }
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/authorization", (req, res) => {
+  const token = req.body.headers["token"];
+  try {
+    if (!token) {
+      res.status(401).send("Unauthorized Access");
+    } else if (token) {
+      jwt.verify(token, secretKey, (err, decode) => {
+        console.log(decode);
+
+        if (decode) {
+          dbConn.query(
+            "SELECT email FROM registration_prince",
+            (err, result) => {
+              if (err) throw err;
+              if (result.find((item) => item.email == decode.email)) {
+                res.status(200).send("ok");
+              }
+            }
+          );
+        } else {
+          res.send(undefined);
+        }
       });
     }
   } catch (error) {

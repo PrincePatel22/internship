@@ -15,9 +15,9 @@ function Home() {
   //   };
 
   return (
-    <div>
+    <div style={{ margin: "10px 500px" }}>
       <h1>Home Page</h1>
-      <div>
+      <div style={{ marginTop: "20px" }}>
         <Link
           to="/Register"
           style={{

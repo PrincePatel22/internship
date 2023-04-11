@@ -36,15 +36,19 @@ function Register() {
     } else if (confirmpassword === "") {
       alert("confirm Password is required");
     } else if (password === confirmpassword) {
-      let baseUrl = "http://localhost:8000/register";
-      let response = axios.post(baseUrl, {
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
-      });
-      alert("User registered successfully");
-      navigation("/");
+      try {
+        let baseUrl = "http://localhost:8000/register";
+        let response = axios.post(baseUrl, {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: password,
+        });
+        alert("User registered successfully");
+        navigation("/");
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       alert("password not matched");
     }

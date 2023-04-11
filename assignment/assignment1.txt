@@ -1,0 +1,39 @@
+
+-   Please create following tables:
+    
+    -   Student_Details
+			
+        -   Name
+
+        -   Standard
+
+        -   Sex
+
+        -   Monthly Present
+
+        -   Daily Hours
+
+    
+    -   PRODUCTS
+        
+        -   Name
+
+        -   Price
+
+    
+    -   Materials
+        
+        -   Name
+
+        -   Price (allow to insert value like "Rs. 100")
+
+	-   Effective Date
+
+
+- Insert appropriate records in each tables.
+
+- Display all the records for each tables separately.
+
+- Remove all the records from each tables (with and without using DELETE statement).
+
+- Delete all the above tables.

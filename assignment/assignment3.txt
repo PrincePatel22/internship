@@ -1,0 +1,43 @@
+-   Tables Used:=
+    
+    -	student  (recid, name)
+
+    -   studentdetail (recid, studentid, standard, flagsex)
+
+    -   studentpresent (recid, studentid, month, present)
+
+    -   studenthours (recid, studentid, datex, hours)
+
+    -   product (recid, name)
+
+    -   productprice (recid, productid, code, effdt, price)
+
+
+-   Write queries for following requirements:=
+    
+    -   Insertion requirement:
+        
+        - Insert appropriate records in all the tables so that their relationships with each other are maintained properly. Insert only first name as 'student.name' in "student" table.
+
+    
+    -   Modification requirement:
+        
+        -   Change value of 'student.name' with any other value for student.recid = 3.
+        
+        -   Update all "student" records to append character " A." as the middle name for "student.name" field.
+
+        -   Update all "productprice" records to add 25.00 in "price" field.
+
+        -   Update "product" table to add "A" in 'product.name' where related 'product.code = AB'.
+
+        -   Update all "studentpresent" records to add 2 in 'studentpresentpresent' where related 'studenthours.hours >= 8'.
+
+
+
+    -   Delete requirement:
+        
+        -   Remove a record from "product" table where 'product.recid = 5'
+        
+        -   Remove all "student" records where the 'student.name' starts with character "A".
+        
+        -   Remove all "studentdetails" record where related 'studenthours.hours <= 3'.

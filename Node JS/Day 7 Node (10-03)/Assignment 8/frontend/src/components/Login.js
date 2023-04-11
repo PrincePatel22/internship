@@ -28,14 +28,14 @@ function Login() {
           email: email,
           password: password,
         });
-        console.log(response.data);
+        console.log(response);
         if (response.data == "Please enter valid credentials") {
           alert("Please enter valid credentials");
           navigation("/Login");
         } else {
           let token = response.data;
           localStorage.setItem("token", token);
-          // navigation("/Profile");
+          navigation("/Dashboard");
         }
       } catch (error) {
         console.log(error);
