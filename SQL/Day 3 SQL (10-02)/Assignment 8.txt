@@ -1,5 +1,5 @@
 Q-1	I want to add 3 days to the current date. Write all possible queries to perform this operation. Explain each one of them.
-SELECT CURDATE() + 3; => we get current date  using CURDATE() and add 
+SELECT CURDATE() + 3; => we get current date  using CURDATE() and add 3
 SELECT CURRENT_DATE() + 3; => We get current date using CURRENT_DATE() and add 3
 SELECT DATE_ADD(CURDATE(),INTERVAL 3 DAY); => We get current date using CURDATE() and Add 3 days interval
 SELECT ADDDATE(CURDATE(),INTERVAL 3 DAY); =>  We get current date using CURDATE() and Add 3 days interval 

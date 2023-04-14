@@ -29,7 +29,7 @@ const Signup = () => {
       alert("password is required");
     } else if (password.length < 6) {
       return alert("Password length must be 6 digit");
-    } else if (password.match(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+    } else if (!password.match(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
       alert(
         "password should contain atleast one number and one special character"
       );

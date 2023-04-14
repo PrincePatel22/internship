@@ -3,7 +3,7 @@ import dbconn from "../models/models.js";
 export const addsleep = (req, res) => {
   try {
     dbconn.query(
-      `insert into sleep_data (sleepdate, asleeptime, wakeuptime, uid) values("${req.body.sleepdate}","${req.body.asleeptime}","${req.body.wakeuptime}","${req.body.id}")`,
+      `insert into sleep_data (sleepdate, asleeptime, wakeuptime, uid,delstatus) values("${req.body.date}","${req.body.sleeptime}","${req.body.wakeuptime}","${req.body.id}","1")`,
       (err, result) => {
         if (err) throw err;
         res.status(200).send("Data added successfully");
@@ -17,23 +17,26 @@ export const addsleep = (req, res) => {
 export const deletesleep = (req, res) => {
   try {
     dbconn.query(
-      `delete from sleep_data where recid="${req.body.id}"`,
+      `update sleep_data set delstatus="0" where recid="${req.body.id}"`,
       (err, result) => {
         if (err) throw err;
-        res.send("Data deleted successfully");
+        res.sendStatus(200);
       }
     );
-  } catch (error) {     
+  } catch (error) {
     console.log(error);
   }
 };
 
-export const getsleep = (req, res) => {
+export const getsleeps = (req, res) => {
   try {
-    dbconn.query(`select * from sleep_data`, (err, result) => {
-      if (err) throw err;
-      res.send(result);
-    });
+    dbconn.query(
+      `select *,TIMEDIFF(wakeuptime,asleeptime) as sleepdiff,date_format(sleepdate,"%d/%c") as sleepdate  from sleep_data where uid="${req.body.id}" and delstatus="1" order by sleepdate desc limit 7`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
   } catch (error) {
     console.log(error);
   }

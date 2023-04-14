@@ -1,6 +1,7 @@
 import exceljs from "exceljs";
 import dbConn from "./models/models";
 
+// for insert delete record in database and for update change something in frontend
 export default async function importUsers(req, res) {
   const data = [];
   const workbook = new exceljs.Workbook();

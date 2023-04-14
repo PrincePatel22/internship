@@ -12,6 +12,8 @@ const Login = () => {
 
     if (email == "") {
       alert("email is required");
+    } else if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      return alert("Please enter valid email");
     } else if (password == "") {
       alert("Password is required");
     } else {
@@ -20,14 +22,15 @@ const Login = () => {
           email: email,
           password: password,
         });
-        console.log(response.data);
         if (response.data == "Please enter valid credentials") {
           alert("Please enter valid credentials");
-          navigation("/Login");
+          navigation("/login");
         } else {
-          let token = response.data;
+          let token = response.data[0];
+          let userid = response.data[1];
           localStorage.setItem("token", token);
-          navigation("/Profile");
+          localStorage.setItem("uid", userid);
+          navigation("/dashboard");
         }
       } catch (error) {
         console.log(error);

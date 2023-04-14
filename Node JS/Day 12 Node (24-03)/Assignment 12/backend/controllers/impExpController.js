@@ -4,7 +4,7 @@ import dbConn from "../models/models.js";
 export const exportUsers = (req, res) => {
   const users = req.body.users;
 
-  const workbook = new exceljs.Workbook("./Sheets/Users.xlsx");
+  const workbook = new exceljs.Workbook();
   const worksheet = workbook.addWorksheet("Users");
 
   worksheet.columns = [
@@ -20,15 +20,16 @@ export const exportUsers = (req, res) => {
   ];
 
   users.map((i) => worksheet.addRow(i));
-  workbook.xlsx.writeFile("./Sheets/Users.xlsx");
+  workbook.xlsx.writeFile("Users.xlsx");
   res.sendStatus(200);
 };
 
+// for insert delete record in database and for update change something in frontend  
 export const importUsers = async (req, res) => {
   const data = [];
   const workbook = new exceljs.Workbook();
 
-  await workbook.xlsx.readFile("./Sheets/Users.xlsx");
+  await workbook.xlsx.readFile("Users.xlsx");
   const worksheet = workbook.getWorksheet("Users");
   worksheet.eachRow((row, rowCount) => {
     const singleRow = {

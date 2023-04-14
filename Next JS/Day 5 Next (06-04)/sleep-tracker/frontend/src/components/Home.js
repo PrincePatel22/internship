@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
         <h4 style={{ color: "#fff" }}>Sleep Tracker app</h4>
-        <div style={{ marginLeft: "65%" }}>
+        <div style={{ marginLeft: "73%" }}>
           <button
             type="button"
             className="btn btn-dark"
@@ -25,13 +25,13 @@ const Home = () => {
           >
             Login
           </button>
-          <button
+          {/* <button
             type="button"
             className="btn btn-dark"
             onClick={() => navigation("/addsleep")}
           >
             Add Sleep
-          </button>
+          </button> */}
         </div>
       </nav>
       <div

@@ -23,8 +23,9 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  const temp = [];
   dbConn.query(
-    `SELECT email,password FROM sleep_user WHERE email = "${email}" AND password = "${password}"`,
+    `SELECT email,password,recid FROM sleep_user WHERE email = "${email}" AND password = "${password}"`,
     (err, result) => {
       if (
         result.length > 0 &&
@@ -35,7 +36,9 @@ export const login = async (req, res) => {
         dbConn.query(
           `UPDATE sleep_user SET accesstoken="${token}" WHERE password = "${password}" AND email = "${email}"`
         );
-        res.send(token);
+        temp.push(token);
+        temp.push(result[0].recid);
+        res.send(temp);
         // console.log(result);
       } else {
         res.send("Please enter valid credentials");
@@ -43,3 +46,4 @@ export const login = async (req, res) => {
     }
   );
 };
+

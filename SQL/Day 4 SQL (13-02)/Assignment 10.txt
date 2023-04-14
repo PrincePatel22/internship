@@ -63,7 +63,7 @@ Q-11 List Name and Total Monthly Salary (Salary + Over-time Salary) of all the o
 =>  SELECT name AS Name,(salary+overtimesalary) AS Salary FROM officestaff_Prince;
 
 Q-12 List Name and Total Annual Salary of all the office staff members.
-=>  SELECT name AS Name,salary*12 AS Salary FROM officestaff_Prince;
+=>  SELECT name AS Name,(salary+overtimesalary)*12 AS Salary FROM officestaff_Prince;
 
 Q-13 List Name and Total Daily Salary of all the office staff members. (Consider a month is 	of 30 days).
 =>  SELECT name AS Name,salary/30 AS "Daily Salary" FROM officestaff_Prince;
